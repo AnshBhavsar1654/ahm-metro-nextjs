@@ -1,0 +1,17 @@
+pre-commit:
+  commands:
+    prettier:
+      glob: "*.{ts,tsx,css,json}"
+      run: bunx prettier --write {staged_files}
+      stage_fixed: true
+    lint:
+      glob: "*.{ts,tsx}"
+      run: bunx eslint --fix {staged_files}
+      stage_fixed: true
+
+pre-push:
+  commands:
+    typecheck:
+      run: bun run typecheck
+    tests:
+      run: bun run test

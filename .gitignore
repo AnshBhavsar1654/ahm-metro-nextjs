@@ -1,17 +1,26 @@
-# === Node ===
+# === Next.js app (root) ===
+node_modules
+.next
+out
+next-env.d.ts
+*.tsbuildinfo
+.env
+.env.local
+.env.production
+.vercel
+
+# === Node (legacy CRA frontend, deleted at cutover) ===
 frontend/node_modules
 frontend/build
 frontend/.env
 
-# === Python ===
+# === Python (legacy backend, deleted at cutover) ===
 __pycache__/
 *.py[cod]
 *.egg-info/
 *.egg
-.env
+.venv
 venv/
-backend/__pycache__/
-backend/instance/
 .pytest_cache/
 backend/.env
 
@@ -20,11 +29,11 @@ backend/.env
 *.log
 *.sqlite3
 *.db
-
 Ahmedabad_Metro_Gujarati.docx
 Ahmedabad_Metro_Hindi.docx
 Ahmedabad_Metro_Kb.docx
 
+# Repo-private notes (not published while backend/ and frontend/ still exist)
 ENV_VARIABLES.md
 design.md
 backend/data/visits.json

@@ -1,0 +1,44 @@
+{
+  "name": "ahm-metro-nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepare": "lefthook install"
+  },
+  "dependencies": {
+    "next": "^15.5.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.5.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.5.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^15.5.0",
+    "jsdom": "^26.1.0",
+    "lefthook": "^1.8.0",
+    "postcss": "^8.5.3",
+    "prettier": "^3.5.0",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.0",
+    "typescript-eslint": "^8.30.0",
+    "vitest": "^3.0.0"
+  },
+  "trustedDependencies": [
+    "unrs-resolver"
+  ]
+}
