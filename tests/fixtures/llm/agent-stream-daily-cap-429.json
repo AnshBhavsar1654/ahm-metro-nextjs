@@ -1,0 +1,48 @@
+{
+  "status": "error",
+  "error": {
+    "name": "RequestError",
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 19h27m43.784996367s."
+  },
+  "events": [
+    {
+      "atMs": 1052.5,
+      "langgraph_node": "model_request",
+      "isAIMessageChunk": true,
+      "isToolMessage": false,
+      "text": "",
+      "content": [
+        {
+          "type": "functionCall",
+          "functionCall": {
+            "name": "get_fare",
+            "args": {
+              "source": "Motera Stadium",
+              "destination": "Paldi"
+            }
+          }
+        }
+      ],
+      "toolCalls": [
+        {
+          "type": "tool_call",
+          "id": "lc-tool-call-b713172475aa4decb938b07be0e5aecd",
+          "name": "get_fare",
+          "args": {
+            "source": "Motera Stadium",
+            "destination": "Paldi"
+          }
+        }
+      ]
+    },
+    {
+      "atMs": 1066.7,
+      "langgraph_node": "tools",
+      "isAIMessageChunk": false,
+      "isToolMessage": true,
+      "name": "get_fare",
+      "text": "Rs 15",
+      "content": "Rs 15"
+    }
+  ]
+}

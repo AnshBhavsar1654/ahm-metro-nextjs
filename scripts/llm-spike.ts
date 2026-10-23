@@ -133,12 +133,15 @@ async function probeRawModel(): Promise<Record<string, unknown>> {
   return out
 }
 
-/** Probe B: LangGraph agent tool-calling under streamMode "messages". */
-async function probeAgent(): Promise<Record<string, unknown>> {
+/** Probe B: LangGraph agent tool-calling under streamMode "messages" (single mode: live [chunk, meta] tuples). */
+async function probeAgent(target: "a" | "b"): Promise<Record<string, unknown>> {
   const { createAgent } = await import("langchain")
   const { tool } = await import("@langchain/core/tools")
+  const { AIMessageChunk, ToolMessage } = await import("@langchain/core/messages")
   const { z } = await import("zod")
   const { ChatGoogle } = await import("@langchain/google")
+
+  const [model, thinking] = target === "b" ? ([MODEL_B, "minimal"] as const) : ([MODEL_A, "0"] as const)
 
   const get_fare = tool(
     async ({ source, destination }) => {
@@ -154,14 +157,17 @@ async function probeAgent(): Promise<Record<string, unknown>> {
   )
 
   const agent = createAgent({
-    model: new ChatGoogle({
-      model: MODEL_A,
-      apiKey,
-      maxReasoningTokens: 0,
-      temperature: 0.2,
-      maxOutputTokens: 1024,
-      maxRetries: 1,
-    }),
+    model:
+      thinking === "minimal"
+        ? new ChatGoogle({ model, apiKey, reasoningEffort: "minimal", maxOutputTokens: 1024, maxRetries: 1 })
+        : new ChatGoogle({
+            model,
+            apiKey,
+            maxReasoningTokens: Number(thinking),
+            temperature: 0.2,
+            maxOutputTokens: 1024,
+            maxRetries: 1,
+          }),
     tools: [get_fare],
     systemPrompt: "You are the Ahmedabad Metro assistant. Always answer with the get_fare tool; never from memory.",
   })
@@ -170,33 +176,25 @@ async function probeAgent(): Promise<Record<string, unknown>> {
   const events: unknown[] = []
   let firstNode: string | null = null
   try {
+    // Single-string streamMode yields live [chunk, meta] tuples (the array form tags items
+    // as [modeTag, [serializedChunk, meta]] — that nesting is what earlier probes recorded).
     const stream = await agent.stream(
       {
         messages: [["user" as const, "What is the fare from Motera Stadium to Paldi?"]],
       },
-      { streamMode: ["messages"], recursionLimit: 8 },
+      { streamMode: "messages", recursionLimit: 8 },
     )
     for await (const [chunk, meta] of stream as AsyncIterable<[unknown, Record<string, unknown>]>) {
-      const c = chunk as {
-        _getType?: () => string
-        name?: string
-        text?: string
-        content?: unknown
-        tool_call_chunks?: unknown[]
-      }
       firstNode ??= (meta?.langgraph_node as string) ?? "<none>"
       events.push({
         atMs: ms(started),
         langgraph_node: (meta?.langgraph_node as string) ?? "<none>",
-        metaKeys: meta && typeof meta === "object" ? Object.keys(meta).sort() : String(meta),
-        meta: meta && typeof meta === "object" ? meta : undefined,
-        chunkClassName: (chunk as { constructor?: { name?: string } })?.constructor?.name ?? typeof chunk,
-        chunkType: c?._getType?.() ?? "unknown",
-        name: c?.name,
-        content: c?.content,
-        text: c?.text,
-        toolCallChunks: c?.tool_call_chunks,
-        keys: chunk && typeof chunk === "object" ? Object.keys(chunk) : String(chunk),
+        isAIMessageChunk: chunk instanceof AIMessageChunk,
+        isToolMessage: chunk instanceof ToolMessage,
+        name: (chunk as { name?: string }).name,
+        text: (chunk as { text?: string }).text,
+        content: (chunk as { content?: unknown }).content,
+        toolCalls: (chunk as { tool_calls?: unknown[] }).tool_calls,
       })
     }
   } catch (error) {
@@ -258,10 +256,11 @@ async function main(): Promise<void> {
     }
   }
 
-  if (only === "all" || only === "agent") {
-    console.log("tracing agent stream (streamMode messages, 1 tool)...")
-    const agent = await probeAgent()
-    save("agent-stream.json", agent)
+  if (only === "all" || only.startsWith("agent")) {
+    const [, target = "b"] = only.split(":")
+    console.log(`tracing agent stream (streamMode messages, 1 tool, model ${target})...`)
+    const agent = await probeAgent(target === "a" ? "a" : "b")
+    save(target === "a" ? "agent-stream-a.json" : "agent-stream-b.json", agent)
     console.log(`  ${agent.status}: ${agent.eventCount} events, first from node ${agent.firstNode ?? "?"}`)
     if (agent.events) {
       const byNode: Record<string, number> = {}

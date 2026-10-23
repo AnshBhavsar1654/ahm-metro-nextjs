@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "firstNode": "model_request",
+  "eventCount": 6,
+  "events": [
+    {
+      "atMs": 1128.4,
+      "langgraph_node": "model_request",
+      "isAIMessageChunk": true,
+      "isToolMessage": false,
+      "text": "",
+      "content": [
+        {
+          "thoughtSignature": "EmAKXgFpFH0TU1XNaXTgMjFzum0JKcc4X/13sbcjHuv15pIsF3qg1TGe3FPMeHMwRSnYR7Ub7hsBbmPCmX/pc7OJUTmhDFd/lS7Q3IQJGKdO91huNDsFTv4P4XZAXv3//Yc=",
+          "type": "functionCall",
+          "functionCall": {
+            "name": "get_fare",
+            "args": {
+              "source": "Motera Stadium",
+              "destination": "Paldi"
+            },
+            "id": "call_873194"
+          }
+        }
+      ],
+      "toolCalls": [
+        {
+          "type": "tool_call",
+          "id": "call_873194",
+          "name": "get_fare",
+          "args": {
+            "source": "Motera Stadium",
+            "destination": "Paldi"
+          },
+          "thoughtSignature": "EmAKXgFpFH0TU1XNaXTgMjFzum0JKcc4X/13sbcjHuv15pIsF3qg1TGe3FPMeHMwRSnYR7Ub7hsBbmPCmX/pc7OJUTmhDFd/lS7Q3IQJGKdO91huNDsFTv4P4XZAXv3//Yc="
+        }
+      ]
+    },
+    {
+      "atMs": 1142.1,
+      "langgraph_node": "model_request",
+      "isAIMessageChunk": true,
+      "isToolMessage": false,
+      "text": "",
+      "content": "",
+      "toolCalls": []
+    },
+    {
+      "atMs": 1156.9,
+      "langgraph_node": "tools",
+      "isAIMessageChunk": false,
+      "isToolMessage": true,
+      "name": "get_fare",
+      "text": "Rs 15",
+      "content": "Rs 15"
+    },
+    {
+      "atMs": 2149.7,
+      "langgraph_node": "model_request",
+      "isAIMessageChunk": true,
+      "isToolMessage": false,
+      "text": "The fare",
+      "content": "The fare",
+      "toolCalls": []
+    },
+    {
+      "atMs": 2184.6,
+      "langgraph_node": "model_request",
+      "isAIMessageChunk": true,
+      "isToolMessage": false,
+      "text": " from Motera Stadium to Paldi is Rs 15.",
+      "content": " from Motera Stadium to Paldi is Rs 15.",
+      "toolCalls": []
+    },
+    {
+      "atMs": 2189.2,
+      "langgraph_node": "model_request",
+      "isAIMessageChunk": true,
+      "isToolMessage": false,
+      "text": "",
+      "content": "",
+      "toolCalls": []
+    }
+  ]
+}
