@@ -1,0 +1,26 @@
+{
+  "at-zoom": {
+    "latitude": 23.0225,
+    "longitude": 72.5714,
+    "resolved_url": "https://www.google.com/maps/place/Riverfront/@23.0225,72.5714,15z",
+    "place_name": "Google Maps location"
+  },
+  "query": {
+    "latitude": 23.0225,
+    "longitude": 72.5714,
+    "resolved_url": "https://www.google.com/maps/search/?api=1&query=23.0225,72.5714",
+    "place_name": "Google Maps location"
+  },
+  "ll": {
+    "latitude": 23.0225,
+    "longitude": 72.5714,
+    "resolved_url": "https://maps.google.com/?ll=23.0225,72.5714",
+    "place_name": "Google Maps location"
+  },
+  "3d-4d": {
+    "latitude": 23.0225,
+    "longitude": 72.5714,
+    "resolved_url": "https://www.google.com/maps/@?api=1&map_action=pano&heading=-45&pitch=-20&!3d23.0225!4d72.5714",
+    "place_name": "Google Maps location"
+  }
+}

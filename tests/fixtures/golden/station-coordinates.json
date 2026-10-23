@@ -1,0 +1,312 @@
+[
+  {
+    "name": "AEC",
+    "latitude": 23.0751088,
+    "longitude": 72.593291
+  },
+  {
+    "name": "APMC",
+    "latitude": 22.9977445,
+    "longitude": 72.5371222
+  },
+  {
+    "name": "Airport",
+    "latitude": 23.07188,
+    "longitude": 72.61976
+  },
+  {
+    "name": "Akshardham",
+    "latitude": 23.2236772,
+    "longitude": 72.6641817
+  },
+  {
+    "name": "Amraivadi",
+    "latitude": 23.0076672,
+    "longitude": 72.6287279
+  },
+  {
+    "name": "Apparel Park",
+    "latitude": 23.0106696,
+    "longitude": 72.6180098
+  },
+  {
+    "name": "Ashram Road",
+    "latitude": 23.0985,
+    "longitude": 72.6068
+  },
+  {
+    "name": "Commerce Six Road",
+    "latitude": 23.0407013,
+    "longitude": 72.552973
+  },
+  {
+    "name": "Dholakuva Circle",
+    "latitude": 23.1859445,
+    "longitude": 72.6433202
+  },
+  {
+    "name": "Doordarshan Kendra",
+    "latitude": 23.0481764,
+    "longitude": 72.5244209
+  },
+  {
+    "name": "GIFT City House",
+    "latitude": 23.163887,
+    "longitude": 72.680325
+  },
+  {
+    "name": "GNLU",
+    "latitude": 23.1544724,
+    "longitude": 72.6474689
+  },
+  {
+    "name": "Gandhigram",
+    "latitude": 23.0270955,
+    "longitude": 72.5690238
+  },
+  {
+    "name": "Ghee Kanta",
+    "latitude": 23.028794,
+    "longitude": 72.5867752
+  },
+  {
+    "name": "Gift City",
+    "latitude": 23.1533555,
+    "longitude": 72.6855536
+  },
+  {
+    "name": "Gujarat Biotechnology University",
+    "latitude": 23.170855,
+    "longitude": 72.67346
+  },
+  {
+    "name": "Gujarat University",
+    "latitude": 23.0448477,
+    "longitude": 72.5435296
+  },
+  {
+    "name": "Gurukul Road",
+    "latitude": 23.0458829,
+    "longitude": 72.5348734
+  },
+  {
+    "name": "Infocity",
+    "latitude": 23.1922574,
+    "longitude": 72.6397126
+  },
+  {
+    "name": "Jivraj Park",
+    "latitude": 23.0054989,
+    "longitude": 72.5334928
+  },
+  {
+    "name": "Juna Koba",
+    "latitude": 23.1419718,
+    "longitude": 72.6386122
+  },
+  {
+    "name": "Juna Sachivalaya",
+    "latitude": 23.228926,
+    "longitude": 72.6594151
+  },
+  {
+    "name": "Kalupur Railway Station",
+    "latitude": 23.0246913,
+    "longitude": 72.6031447
+  },
+  {
+    "name": "Kankaria East",
+    "latitude": 23.0154573,
+    "longitude": 72.6070016
+  },
+  {
+    "name": "Koba Circle",
+    "latitude": 23.1322508,
+    "longitude": 72.631042
+  },
+  {
+    "name": "Koba Gam",
+    "latitude": 23.1476098,
+    "longitude": 72.6439055
+  },
+  {
+    "name": "Koteshwar Prachin Mandir",
+    "latitude": 23.09462,
+    "longitude": 72.61194
+  },
+  {
+    "name": "Koteshwar Road",
+    "latitude": 23.1031114,
+    "longitude": 72.6021329
+  },
+  {
+    "name": "Mahatma Mandir",
+    "latitude": 23.2339412,
+    "longitude": 72.6338714
+  },
+  {
+    "name": "Motera Stadium",
+    "latitude": 23.0967726,
+    "longitude": 72.596692
+  },
+  {
+    "name": "Narmada Canal",
+    "latitude": 23.1251457,
+    "longitude": 72.6220979
+  },
+  {
+    "name": "Nirant Cross Road",
+    "latitude": 22.9997169,
+    "longitude": 72.658889
+  },
+  {
+    "name": "Old High Court",
+    "latitude": 23.0372892,
+    "longitude": 72.5672065
+  },
+  {
+    "name": "PDEU",
+    "latitude": 23.1548645,
+    "longitude": 72.6612117
+  },
+  {
+    "name": "Paldi",
+    "latitude": 23.0185053,
+    "longitude": 72.5624076
+  },
+  {
+    "name": "Rabari Colony",
+    "latitude": 23.0054703,
+    "longitude": 72.6354063
+  },
+  {
+    "name": "Rajivnagar",
+    "latitude": 23.0097229,
+    "longitude": 72.5367523
+  },
+  {
+    "name": "Randesan",
+    "latitude": 23.1790845,
+    "longitude": 72.6472905
+  },
+  {
+    "name": "Ranip",
+    "latitude": 23.0676741,
+    "longitude": 72.5740838
+  },
+  {
+    "name": "Raysan",
+    "latitude": 23.1663954,
+    "longitude": 72.6483252
+  },
+  {
+    "name": "SP Stadium",
+    "latitude": 23.0398414,
+    "longitude": 72.5616768
+  },
+  {
+    "name": "Sabarmati",
+    "latitude": 23.0856303,
+    "longitude": 72.592206
+  },
+  {
+    "name": "Sabarmati Railway Station",
+    "latitude": 23.0696844,
+    "longitude": 72.5863981
+  },
+  {
+    "name": "Sabarmati River",
+    "latitude": 23.0879,
+    "longitude": 72.6181
+  },
+  {
+    "name": "Sachivalaya",
+    "latitude": 23.2150688,
+    "longitude": 72.6587511
+  },
+  {
+    "name": "Sardarnagar",
+    "latitude": 23.08111,
+    "longitude": 72.62423
+  },
+  {
+    "name": "Sector-1",
+    "latitude": 23.2049077,
+    "longitude": 72.6431519
+  },
+  {
+    "name": "Sector-10A",
+    "latitude": 23.2114841,
+    "longitude": 72.6501927
+  },
+  {
+    "name": "Sector-16",
+    "latitude": 23.2338826,
+    "longitude": 72.6501659
+  },
+  {
+    "name": "Sector-24",
+    "latitude": 23.2385075,
+    "longitude": 72.6414782
+  },
+  {
+    "name": "Shahpur",
+    "latitude": 23.0392105,
+    "longitude": 72.5810327
+  },
+  {
+    "name": "Shahpur (Gandhinagar)",
+    "latitude": 23.1820852,
+    "longitude": 72.6742387
+  },
+  {
+    "name": "Shreyas",
+    "latitude": 23.0135977,
+    "longitude": 72.5492225
+  },
+  {
+    "name": "Tapovan Circle",
+    "latitude": 23.1201271,
+    "longitude": 72.6157987
+  },
+  {
+    "name": "Thaltej",
+    "latitude": 23.049748,
+    "longitude": 72.5160152
+  },
+  {
+    "name": "Thaltej Gam",
+    "latitude": 23.0502062,
+    "longitude": 72.5070123
+  },
+  {
+    "name": "Usmanpura",
+    "latitude": 23.0458371,
+    "longitude": 72.564982
+  },
+  {
+    "name": "Vadaj",
+    "latitude": 23.0676671,
+    "longitude": 72.5657588
+  },
+  {
+    "name": "Vastral",
+    "latitude": 23.0035988,
+    "longitude": 72.6475942
+  },
+  {
+    "name": "Vastral Gam",
+    "latitude": 22.9971397,
+    "longitude": 72.667391
+  },
+  {
+    "name": "Vijaynagar",
+    "latitude": 23.0561913,
+    "longitude": 72.5623389
+  },
+  {
+    "name": "Vishvakarma College",
+    "latitude": 23.1141999,
+    "longitude": 72.6083864
+  }
+]

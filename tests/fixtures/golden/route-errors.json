@@ -1,0 +1,11 @@
+{
+  "unknown-source": {
+    "error": "Station 'Nope Station' not found"
+  },
+  "unknown-destination": {
+    "error": "Station 'Nope Station' not found"
+  },
+  "same-station": {
+    "error": "Source and destination cannot be the same"
+  }
+}

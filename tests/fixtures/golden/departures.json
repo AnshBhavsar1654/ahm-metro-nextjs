@@ -1,0 +1,1892 @@
+{
+  "AEC": {
+    "station": "AEC",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:40",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:04",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:27",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "06:48",
+        "last": "21:12"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:30",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:46",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:54",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:32",
+        "last": "21:55"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "APMC": {
+    "station": "APMC",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:36",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "10:59",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "11:25",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          }
+        ],
+        "first": "06:20",
+        "last": "20:45"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Airport": {
+    "station": "Airport",
+    "status": "work in progress",
+    "directions": [],
+    "source": null
+  },
+  "Akshardham": {
+    "station": "Akshardham",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:57",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:21",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:45",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "07:29",
+        "last": "21:54"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:36",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:00",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:24",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "06:49",
+        "last": "21:10"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Amraivadi": {
+    "station": "Amraivadi",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Apparel Park": {
+    "station": "Apparel Park",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Ashram Road": {
+    "station": "Ashram Road",
+    "status": "work in progress",
+    "directions": [],
+    "source": null
+  },
+  "Commerce Six Road": {
+    "station": "Commerce Six Road",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Dholakuva Circle": {
+    "station": "Dholakuva Circle",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:45",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:09",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:33",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "07:17",
+        "last": "21:42"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:48",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:12",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:36",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:02",
+        "last": "21:23"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Doordarshan Kendra": {
+    "station": "Doordarshan Kendra",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "GIFT City House": {
+    "station": "GIFT City House",
+    "status": "work in progress",
+    "directions": [],
+    "source": null
+  },
+  "GNLU": {
+    "station": "GNLU",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:38",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "11:02",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "11:26",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          }
+        ],
+        "first": "07:10",
+        "last": "21:35"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:31",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "10:56",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "11:20",
+            "destination": "APMC",
+            "approx": false
+          }
+        ],
+        "first": "07:09",
+        "last": "21:31"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Gandhigram": {
+    "station": "Gandhigram",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:48",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:11",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:37",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "06:32",
+        "last": "20:57"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:46",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:02",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:10",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:48",
+        "last": "22:11"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Ghee Kanta": {
+    "station": "Ghee Kanta",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Gift City": {
+    "station": "Gift City",
+    "directions": [
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "16:17",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "17:08",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "18:21",
+            "destination": "APMC",
+            "approx": false
+          }
+        ],
+        "first": "07:48",
+        "last": "19:13"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Gujarat Biotechnology University": {
+    "station": "Gujarat Biotechnology University",
+    "status": "work in progress",
+    "directions": [],
+    "source": null
+  },
+  "Gujarat University": {
+    "station": "Gujarat University",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Gurukul Road": {
+    "station": "Gurukul Road",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Infocity": {
+    "station": "Infocity",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:47",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "11:11",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "11:35",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          }
+        ],
+        "first": "07:19",
+        "last": "21:44"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:45",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "11:09",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "11:33",
+            "destination": "APMC",
+            "approx": false
+          }
+        ],
+        "first": "06:59",
+        "last": "21:20"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Jivraj Park": {
+    "station": "Jivraj Park",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:38",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:01",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:27",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "06:22",
+        "last": "20:47"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:31",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:56",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:12",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:57",
+        "last": "22:20"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Juna Koba": {
+    "station": "Juna Koba",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:34",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "10:58",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:22",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "07:06",
+        "last": "21:31"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:36",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:01",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:25",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:14",
+        "last": "21:36"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Juna Sachivalaya": {
+    "station": "Juna Sachivalaya",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:30",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "10:59",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:23",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "07:31",
+        "last": "21:56"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:33",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:57",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:21",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "06:47",
+        "last": "21:07"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Kalupur Railway Station": {
+    "station": "Kalupur Railway Station",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Kankaria East": {
+    "station": "Kankaria East",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Koba Circle": {
+    "station": "Koba Circle",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:32",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "10:56",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:20",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "07:04",
+        "last": "21:29"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:31",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:38",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:03",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:16",
+        "last": "21:38"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Koba Gam": {
+    "station": "Koba Gam",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:36",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:00",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:24",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "07:08",
+        "last": "21:33"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:33",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:58",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:22",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:11",
+        "last": "21:33"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Koteshwar Prachin Mandir": {
+    "station": "Koteshwar Prachin Mandir",
+    "status": "work in progress",
+    "directions": [],
+    "source": null
+  },
+  "Koteshwar Road": {
+    "station": "Koteshwar Road",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:47",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "11:11",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "11:35",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          }
+        ],
+        "first": "06:55",
+        "last": "21:20"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:39",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "10:47",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "11:12",
+            "destination": "APMC",
+            "approx": false
+          }
+        ],
+        "first": "07:25",
+        "last": "21:47"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Mahatma Mandir": {
+    "station": "Mahatma Mandir",
+    "directions": [
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:50",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "11:14",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "11:38",
+            "destination": "APMC",
+            "approx": false
+          }
+        ],
+        "first": "06:40",
+        "last": "21:00"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Motera Stadium": {
+    "station": "Motera Stadium",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:44",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "11:08",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "11:32",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          }
+        ],
+        "first": "06:52",
+        "last": "21:17"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:42",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "10:50",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "11:15",
+            "destination": "APMC",
+            "approx": false
+          }
+        ],
+        "first": "07:28",
+        "last": "21:50"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Narmada Canal": {
+    "station": "Narmada Canal",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:53",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:17",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:41",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "07:01",
+        "last": "21:26"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:33",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:40",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:05",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:18",
+        "last": "21:40"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Nirant Cross Road": {
+    "station": "Nirant Cross Road",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Old High Court": {
+    "station": "Old High Court",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:50",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "11:13",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "11:39",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          }
+        ],
+        "first": "06:34",
+        "last": "20:59"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:44",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "11:00",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "11:08",
+            "destination": "APMC",
+            "approx": false
+          }
+        ],
+        "first": "07:46",
+        "last": "22:09"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "PDEU": {
+    "station": "PDEU",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "16:09",
+            "destination": "Gift City",
+            "approx": true
+          },
+          {
+            "time": "16:56",
+            "destination": "Gift City",
+            "approx": true
+          },
+          {
+            "time": "18:09",
+            "destination": "Gift City",
+            "approx": true
+          }
+        ],
+        "first": "07:39",
+        "last": "19:00"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "16:20",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "17:12",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "18:24",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:52",
+        "last": "19:16"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Paldi": {
+    "station": "Paldi",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:45",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:08",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:34",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "06:29",
+        "last": "20:54"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:49",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:05",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:13",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:50",
+        "last": "22:13"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Rabari Colony": {
+    "station": "Rabari Colony",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Rajivnagar": {
+    "station": "Rajivnagar",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:41",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:04",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:30",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "06:25",
+        "last": "20:50"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:53",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:09",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:17",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:55",
+        "last": "22:18"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Randesan": {
+    "station": "Randesan",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:42",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:06",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:30",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "07:14",
+        "last": "21:40"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:50",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:14",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:38",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:04",
+        "last": "21:26"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Ranip": {
+    "station": "Ranip",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:35",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "10:59",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:22",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "06:43",
+        "last": "21:08"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:35",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:51",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:59",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:37",
+        "last": "22:00"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Raysan": {
+    "station": "Raysan",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:40",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:04",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:28",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "07:12",
+        "last": "21:37"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:53",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:17",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:41",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:06",
+        "last": "21:28"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "SP Stadium": {
+    "station": "SP Stadium",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Sabarmati": {
+    "station": "Sabarmati",
+    "status": "work in progress",
+    "directions": [],
+    "source": null
+  },
+  "Sabarmati Railway Station": {
+    "station": "Sabarmati Railway Station",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:37",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:01",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:25",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "06:45",
+        "last": "21:10"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:33",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:49",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:57",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:35",
+        "last": "21:57"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Sabarmati River": {
+    "station": "Sabarmati River",
+    "status": "work in progress",
+    "directions": [],
+    "source": null
+  },
+  "Sachivalaya": {
+    "station": "Sachivalaya",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:55",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "11:19",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          },
+          {
+            "time": "11:43",
+            "destination": "Mahatma Mandir",
+            "approx": false
+          }
+        ],
+        "first": "07:27",
+        "last": "21:52"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:38",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "11:02",
+            "destination": "APMC",
+            "approx": false
+          },
+          {
+            "time": "11:26",
+            "destination": "APMC",
+            "approx": false
+          }
+        ],
+        "first": "06:51",
+        "last": "21:12"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Sardarnagar": {
+    "station": "Sardarnagar",
+    "status": "work in progress",
+    "directions": [],
+    "source": null
+  },
+  "Sector-1": {
+    "station": "Sector-1",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:50",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:14",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:38",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "07:22",
+        "last": "21:47"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:43",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:07",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:31",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "06:56",
+        "last": "21:17"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Sector-10A": {
+    "station": "Sector-10A",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:52",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:16",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:40",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "07:24",
+        "last": "21:49"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:40",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:04",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:28",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "06:54",
+        "last": "21:15"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Sector-16": {
+    "station": "Sector-16",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:33",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:02",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:26",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "07:34",
+        "last": "21:59"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:31",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:55",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:19",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "06:44",
+        "last": "21:05"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Sector-24": {
+    "station": "Sector-24",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:35",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:04",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:28",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "07:36",
+        "last": "22:01"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:52",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:16",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:40",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "06:42",
+        "last": "21:02"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Shahpur": {
+    "station": "Shahpur",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Shahpur (Gandhinagar)": {
+    "station": "Shahpur (Gandhinagar)",
+    "status": "work in progress",
+    "directions": [],
+    "source": null
+  },
+  "Shreyas": {
+    "station": "Shreyas",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:43",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:06",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:32",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "06:27",
+        "last": "20:52"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:51",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:07",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:15",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:52",
+        "last": "22:16"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Tapovan Circle": {
+    "station": "Tapovan Circle",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:51",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:15",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:39",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "06:59",
+        "last": "21:24"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:35",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:42",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:07",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:20",
+        "last": "21:42"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Thaltej": {
+    "station": "Thaltej",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Thaltej Gam": {
+    "station": "Thaltej Gam",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Usmanpura": {
+    "station": "Usmanpura",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:52",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:15",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:41",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "06:36",
+        "last": "21:01"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:42",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:58",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:06",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:44",
+        "last": "22:07"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Vadaj": {
+    "station": "Vadaj",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:33",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "10:57",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:20",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "06:41",
+        "last": "21:06"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:37",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:53",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:01",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:39",
+        "last": "22:02"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Vastral": {
+    "station": "Vastral",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Vastral Gam": {
+    "station": "Vastral Gam",
+    "status": "operational",
+    "directions": [],
+    "source": null
+  },
+  "Vijaynagar": {
+    "station": "Vijaynagar",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:30",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "10:54",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:18",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "06:38",
+        "last": "21:04"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:40",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:56",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:04",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:42",
+        "last": "22:04"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  },
+  "Vishvakarma College": {
+    "station": "Vishvakarma College",
+    "directions": [
+      {
+        "towards": "Mahatma Mandir / GIFT City",
+        "trains": [
+          {
+            "time": "10:49",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:13",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          },
+          {
+            "time": "11:37",
+            "destination": "Mahatma Mandir",
+            "approx": true
+          }
+        ],
+        "first": "06:57",
+        "last": "21:22"
+      },
+      {
+        "towards": "APMC",
+        "trains": [
+          {
+            "time": "10:37",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "10:45",
+            "destination": "APMC",
+            "approx": true
+          },
+          {
+            "time": "11:10",
+            "destination": "APMC",
+            "approx": true
+          }
+        ],
+        "first": "07:23",
+        "last": "21:45"
+      }
+    ],
+    "source": "GMRC timetable w.e.f. 18 May 2026"
+  }
+}
