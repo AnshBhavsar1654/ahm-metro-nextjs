@@ -1,0 +1,17 @@
+{
+  "bad_key": {
+    "name": "RequestError",
+    "message": "API key not valid. Please pass a valid API key."
+  },
+  "bad_model": {
+    "name": "RequestError",
+    "message": "models/gemini-does-not-exist-42 is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods."
+  },
+  "burst": {
+    "elapsedMs": 520.7,
+    "outcomes": {
+      "RequestError|You exceeded your current quota, please check your plan and billing details. For": 12
+    },
+    "sampleError": "{\n \"name\": \"RequestError\",\n \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10, model: gemini-2.5-flash-lite\\nPlease retry in 9.405504558s.\"\n}"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "plain/gemini-2.5-flash-lite": {
+    "status": "ok",
+    "firstTokenMs": 1003,
+    "totalTimeMs": 1014.9,
+    "chunkCount": 2,
+    "text": "OK gemini-2.5-flash-lite",
+    "usageMetadata": {
+      "input_tokens": 0,
+      "output_tokens": 5,
+      "total_tokens": 5,
+      "input_token_details": {
+        "text": 0,
+        "cache_read": 0
+      },
+      "output_token_details": {
+        "reasoning": 0
+      }
+    }
+  },
+  "plain/gemini-3.5-flash-lite": {
+    "status": "ok",
+    "firstTokenMs": 7529.2,
+    "totalTimeMs": 7552.9,
+    "chunkCount": 2,
+    "text": "OK gemini-3.5-flash-lite",
+    "usageMetadata": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0,
+      "input_token_details": {
+        "text": 0,
+        "cache_read": 0
+      },
+      "output_token_details": {
+        "reasoning": 0
+      }
+    }
+  }
+}
