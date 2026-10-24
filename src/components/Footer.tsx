@@ -32,6 +32,7 @@ const SOCIALS = [
 ]
 
 const VISIT_KEY = "metro_visit_day"
+const TAB_KEY = "metro_tab_id"
 const today = () => new Date().toISOString().slice(0, 10)
 
 // Counts this browser once a day, then follows the live total and how many people have the site open.
@@ -60,7 +61,15 @@ const VisitCounter = () => {
     }
 
     if (typeof EventSource === "undefined") return undefined
-    const source = new EventSource(`${API_URL}/api/visits/stream`) // reconnects by itself if dropped
+    // One id per tab: a refresh reuses it, so the old stream (which the host may keep open a while) isn't counted too.
+    let tab = ""
+    try {
+      tab = sessionStorage.getItem(TAB_KEY) ?? ""
+      if (!tab) sessionStorage.setItem(TAB_KEY, (tab = crypto.randomUUID()))
+    } catch {
+      tab = crypto.randomUUID()
+    }
+    const source = new EventSource(`${API_URL}/api/visits/stream?id=${tab}`) // reconnects by itself if dropped
     source.onmessage = (e) => {
       try {
         const data = JSON.parse(e.data)

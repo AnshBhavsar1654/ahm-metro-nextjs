@@ -93,10 +93,13 @@ export class VisitCounter {
 
   /**
    * Current numbers now, then again after every change; null is a heartbeat. Counts as one person
-   * online while open. Aborting `signal` ends it at once (the visitor left).
+   * online while open. Aborting `signal` ends it at once (the visitor left). `id` names the visitor's tab,
+   * so a refresh (whose old stream serverless hosting may keep alive for a while) is still one person.
    */
-  async *stream(signal?: AbortSignal): AsyncGenerator<VisitSnapshot | null> {
-    const id = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`
+  async *stream(
+    signal?: AbortSignal,
+    id = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
+  ): AsyncGenerator<VisitSnapshot | null> {
     let wake: (() => void) | null = null
     const listener = () => wake?.()
     this.listeners.add(listener)
