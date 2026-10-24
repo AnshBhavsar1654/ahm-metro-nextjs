@@ -1,8 +1,8 @@
 /**
  * Phase 1 golden test: the exceljs parse layer reproduces the committed network.json.
  *
- * The comparison runs against backend/data (legacy inputs) until the data files move to
- * src/data in Phase 2; build_network.ts (Phase 4) must keep this test green.
+ * The GMRC workbooks live in data/; the full build (src/domain/metro/build-network.ts) is pinned to
+ * the committed network.json by tests/network-build.test.ts.
  */
 import fs from "node:fs"
 import path from "node:path"
@@ -18,8 +18,8 @@ import {
   round,
 } from "@/domain/metro/excel-parse"
 
-const DATA_DIR = path.resolve(import.meta.dirname, "../backend/data")
-const NETWORK = JSON.parse(fs.readFileSync(path.join(DATA_DIR, "network.json"), "utf8")) as {
+const DATA_DIR = path.resolve(import.meta.dirname, "../data")
+const NETWORK = JSON.parse(fs.readFileSync(path.resolve(import.meta.dirname, "../src/data/network.json"), "utf8")) as {
   transfer_minutes: number
   stations: Record<string, { lat: number; lon: number; status: string }>
   lines: { id: string; name: string; corridor: string; status: string; stations: string[] }[]

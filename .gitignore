@@ -9,20 +9,12 @@ next-env.d.ts
 .env.production
 .vercel
 
-# === Node (legacy CRA frontend, deleted at cutover) ===
-frontend/node_modules
-frontend/build
-frontend/.env
-
-# === Python (legacy backend, deleted at cutover) ===
+# === Python (golden-capture scripts) ===
 __pycache__/
 *.py[cod]
-*.egg-info/
-*.egg
-.venv
-venv/
-.pytest_cache/
-backend/.env
+
+# === Runtime state (visit count when Redis isn't configured) ===
+.data/
 
 # === General ===
 .DS_Store
@@ -32,8 +24,3 @@ backend/.env
 Ahmedabad_Metro_Gujarati.docx
 Ahmedabad_Metro_Hindi.docx
 Ahmedabad_Metro_Kb.docx
-
-# Repo-private notes (not published while backend/ and frontend/ still exist)
-ENV_VARIABLES.md
-design.md
-backend/data/visits.json

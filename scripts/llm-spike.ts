@@ -145,7 +145,7 @@ async function probeAgent(target: "a" | "b"): Promise<Record<string, unknown>> {
 
   const get_fare = tool(
     async ({ source, destination }) => {
-      const net = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "..", "backend", "data", "network.json"), "utf8"))
+      const net = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "..", "src", "data", "network.json"), "utf8"))
       const fare = (net.fares as Record<string, Record<string, number>>)[source]?.[destination]
       return fare == null ? `no fare for ${source} -> ${destination}` : `Rs ${fare}`
     },

@@ -1,0 +1,226 @@
+[
+  {
+    "history": [
+      {
+        "role": "user",
+        "text": "fare from paldi?"
+      },
+      {
+        "role": "bot",
+        "text": "I found Paldi. Which station..."
+      }
+    ],
+    "message": "thaltej",
+    "rules": "Fare from Paldi to Thaltej: ₹15.\nAbout 8.2 km, 9 stations, roughly 22 min. Change lines at Old High Court.",
+    "messages": [
+      {
+        "role": "user",
+        "content": "fare from paldi?"
+      },
+      {
+        "role": "assistant",
+        "content": "I found Paldi. Which station..."
+      },
+      {
+        "role": "user",
+        "content": "thaltej\n\n[Rider writes English. Reply in that language. Now in Ahmedabad: Wednesday 01 July 2026, 10:30 AM.]\n[Station facts: {\"station\": \"Thaltej\", \"status\": \"operational\", \"lines\": [\"Blue Line\"], \"is_interchange\": false, \"type\": \"Elevated\", \"entry_exit_gates\": [\"Gate No. 1\", \"Gate No. 2\", \"Gate No. 3\", \"Gate No. 4\"], \"lifts\": [\"Lift No. 01 near Gate No. 02\", \"Lift No. 02 near Gate No. 04\"]}]\n[Knowledge base excerpts:\nFares and Ticket Prices:\nFares are set by the stations you travel between (the app's fare matrix), not by the route you take. Ask the assistant for the fare between any two stations, or use the Plan Journey page (/routes).\n- Minimum fare: Rs 5. Within Ahmedabad (Phase 1) the maximum is Rs 25. Longer journeys to Gandhinagar and GIFT City cost up to Rs 40.\n- Fare steps: Rs 5, 10, 15, 20, 25, 30, 35, 40.\n- Examples: Thaltej Gam to Vastral Gam Rs 25; APMC to Motera Stadium Rs 20; Koteshwar Road to Mahatma Mandir Rs 25; APMC to Gift City Rs 30.\n- Smart card (GMRC CSC) and NCMC users get 10% off every completed journey.\n- Changing lines at an interchange costs nothing extra.\n\nStation List by Line, Places Near Stations:\nRed Line (North-South Corridor, APMC to Koteshwar Road):\nAPMC, Jivraj Park, Rajivnagar, Shreyas, Paldi, Gandhigram, Old High Court, Usmanpura, Vijaynagar, Vadaj, Ranip, Sabarmati Railway Station, AEC, Sabarmati (work in progress), Motera Stadium, Koteshwar Road\n\nBlue Line (East-West Corridor, Thaltej Gam to Vastral Gam):\nThaltej Gam, Thaltej, Doordarshan Kendra, Gurukul Road, Gujarat University, Commerce Six Road, SP Stadium, Old High Court, Shahpur, Ghee Kanta, Kalupur Railway Station, Kankaria East, Apparel Park, Amraivadi, Rabari Colony, Vastral, Nirant Cross Road, Vastral Gam\n\nYellow Line (Corridor-1, Koteshwar Road to Mahatma Mandir):\nKoteshwar Road, Vishvakarma College, Tapovan Circle, Narmada Canal, Koba Circle, Juna Koba, Koba Gam, GNLU, Raysan, Randesan, Dholakuva Circle, Infocity, Sector-1, Sector-10A, Sachivalaya, Akshardham, Juna Sachivalaya, Sector-16, Sector-24, Mahatma Mandir\n\nViolet Line (Corridor-2, GNLU to Gift City):\nGNLU, PDEU, Gift City\n\nPink Line (Airport Corridor, Koteshwar Road to Airport, work in progress):\nKoteshwar Road, Ashram Road, Koteshwar Prachin Mandir, Sabarmati River, Sardarnagar, Airport\n\nLight Blue Line (GIFT City Extension, Gift City to Shahpur, work in progress):\nGift City, GIFT City House, Gujarat Biotechnology University, Shahpur (Gandhinagar)\n\nPlaces near stations: Kalupur Railway Station for Ahmedabad railway station; Sabarmati Railway Station for Sabarmati Junction; Kankaria East for Kankaria Lake; Motera Stadium for Narendra Modi Stadium; Akshardham for Akshardham temple, Gandhinagar; Mahatma Mandir for Mahatma Mandir convention centre; Gujarat University and Commerce Six Road for the university area; Old High Court and Usmanpura for Ashram Road; Gift City and PDEU for GIFT City and PDEU university. For any other place, use /nearest-stations.\n\nTicket Types and How to Buy Tickets (QR, App, Counter):\nFare products: single journey ticket, return journey ticket, group ticket (for groups of more than 9 passengers).\nFare media accepted: QR tickets (paper and mobile), contactless smart token, GMRC contactless smart card (CSC), NCMC card. Temporary paper tickets are used only if the ticketing system fails, and special paper tickets for special events.\n\nWays to buy:\n- Ticket window (kiosk counter) at every operational station: cash, UPI or debit/credit card.\n- Ticket vending machines (TVM) at stations: self-service.\n- Mobile QR ticket in the official \"Ahmedabad Metro\" app (GMRC): pay by UPI, debit/credit card or net banking. Mobile QR tickets can be bought only during service hours.\n- Tap in with a GMRC smart card or an NCMC card.\n\nQR ticket rules:\n- A paper QR ticket is valid for 30 minutes from issue, a mobile QR ticket for 180 minutes. Both are valid only for entry at the station they were issued for.\n- Screenshots, photos or photocopies of a QR ticket are not valid. A phone that is dead, switched off, hung or offline at the gate counts as travelling without a ticket, so keep your phone charged.\n- The QR ticket is also your receipt. Keep it until you exit. Damaged or lost QR tickets are not replaced.\n\nTokens and GMRC smart cards are valid only for journeys within Phase 1 (Ahmedabad): the Blue Line (Thaltej Gam to Vastral Gam) and the Red Line from APMC to Motera Stadium. They cannot be used for journeys between Phase 1 and Phase 2 (Koteshwar Road to Mahatma Mandir, GNLU to Gift City). For journeys to or within Gandhinagar and GIFT City, use a QR ticket or an NCMC card.]"
+      }
+    ]
+  },
+  {
+    "history": [
+      {
+        "role": "user",
+        "text": "route from paldi please"
+      },
+      {
+        "role": "bot",
+        "text": "..."
+      }
+    ],
+    "message": "vastral gam",
+    "rules": "Paldi to Vastral Gam, fare ₹20.\n1. Red Line: Paldi to Old High Court (2 stops)\n2. Blue Line: Old High Court to Vastral Gam (10 stops)\nAbout 15.9 km, 13 stations, roughly 40 min.",
+    "messages": [
+      {
+        "role": "user",
+        "content": "route from paldi please"
+      },
+      {
+        "role": "assistant",
+        "content": "..."
+      },
+      {
+        "role": "user",
+        "content": "vastral gam\n\n[Rider writes English. Reply in that language. Now in Ahmedabad: Wednesday 01 July 2026, 10:30 AM.]\n[Station facts: {\"station\": \"Vastral Gam\", \"status\": \"operational\", \"lines\": [\"Blue Line\"], \"is_interchange\": false, \"type\": \"Elevated\", \"entry_exit_gates\": [\"Gate No. 1\", \"Gate No. 2\", \"Gate No. 3\", \"Gate No. 4\"], \"lifts\": [\"Lift No. 01 near Gate No. 01\", \"Lift No. 02 near Gate No. 03\"]}]\n[Knowledge base excerpts:\nFares and Ticket Prices:\nFares are set by the stations you travel between (the app's fare matrix), not by the route you take. Ask the assistant for the fare between any two stations, or use the Plan Journey page (/routes).\n- Minimum fare: Rs 5. Within Ahmedabad (Phase 1) the maximum is Rs 25. Longer journeys to Gandhinagar and GIFT City cost up to Rs 40.\n- Fare steps: Rs 5, 10, 15, 20, 25, 30, 35, 40.\n- Examples: Thaltej Gam to Vastral Gam Rs 25; APMC to Motera Stadium Rs 20; Koteshwar Road to Mahatma Mandir Rs 25; APMC to Gift City Rs 30.\n- Smart card (GMRC CSC) and NCMC users get 10% off every completed journey.\n- Changing lines at an interchange costs nothing extra.\n\nStation List by Line, Places Near Stations:\nRed Line (North-South Corridor, APMC to Koteshwar Road):\nAPMC, Jivraj Park, Rajivnagar, Shreyas, Paldi, Gandhigram, Old High Court, Usmanpura, Vijaynagar, Vadaj, Ranip, Sabarmati Railway Station, AEC, Sabarmati (work in progress), Motera Stadium, Koteshwar Road\n\nBlue Line (East-West Corridor, Thaltej Gam to Vastral Gam):\nThaltej Gam, Thaltej, Doordarshan Kendra, Gurukul Road, Gujarat University, Commerce Six Road, SP Stadium, Old High Court, Shahpur, Ghee Kanta, Kalupur Railway Station, Kankaria East, Apparel Park, Amraivadi, Rabari Colony, Vastral, Nirant Cross Road, Vastral Gam\n\nYellow Line (Corridor-1, Koteshwar Road to Mahatma Mandir):\nKoteshwar Road, Vishvakarma College, Tapovan Circle, Narmada Canal, Koba Circle, Juna Koba, Koba Gam, GNLU, Raysan, Randesan, Dholakuva Circle, Infocity, Sector-1, Sector-10A, Sachivalaya, Akshardham, Juna Sachivalaya, Sector-16, Sector-24, Mahatma Mandir\n\nViolet Line (Corridor-2, GNLU to Gift City):\nGNLU, PDEU, Gift City\n\nPink Line (Airport Corridor, Koteshwar Road to Airport, work in progress):\nKoteshwar Road, Ashram Road, Koteshwar Prachin Mandir, Sabarmati River, Sardarnagar, Airport\n\nLight Blue Line (GIFT City Extension, Gift City to Shahpur, work in progress):\nGift City, GIFT City House, Gujarat Biotechnology University, Shahpur (Gandhinagar)\n\nPlaces near stations: Kalupur Railway Station for Ahmedabad railway station; Sabarmati Railway Station for Sabarmati Junction; Kankaria East for Kankaria Lake; Motera Stadium for Narendra Modi Stadium; Akshardham for Akshardham temple, Gandhinagar; Mahatma Mandir for Mahatma Mandir convention centre; Gujarat University and Commerce Six Road for the university area; Old High Court and Usmanpura for Ashram Road; Gift City and PDEU for GIFT City and PDEU university. For any other place, use /nearest-stations.\n\nTrain Frequency and Gandhinagar / GIFT City Train Times:\nBlue Line (East-West, Thaltej Gam to Vastral Gam):\n- Weekday peak hours: every 9 minutes\n- Weekday off-peak: every 10 minutes\n- Weekends: every 12 minutes\n\nRed Line (North-South, APMC to Koteshwar Road):\n- Weekday peak hours: every 10 minutes\n- Weekday off-peak: every 12 minutes\n- Weekends: every 12 minutes\n\nYellow Line (Koteshwar Road to Mahatma Mandir, Gandhinagar):\n- Served by through trains from APMC (Red Line) that continue to Mahatma Mandir, so riders from APMC to Gandhinagar do not need to change trains.\n- About every 24 minutes. 34 trains a day each way. First train from APMC 6:20 AM, last 8:45 PM; first train from Mahatma Mandir 6:40 AM, last 9:00 PM.\n\nViolet Line (GNLU to Gift City):\n- 8 through trains a day each way between APMC and Gift City, mostly in the morning and evening peaks. From APMC: 6:45, 7:34, 8:03, 9:11 AM and 3:16, 4:03, 5:16, 6:06 PM. From Gift City: 7:48, 8:37, 9:01, 10:18 AM and 4:17, 5:08, 6:21, 7:13 PM.\n- Between these trains there is no Violet Line service, so check /schedule before travelling to GIFT City.\n\nPink Line and Light Blue Line: not running yet (work in progress).\n\nPeak hours on weekdays: 8:00 AM to 11:00 AM and 5:00 PM to 8:00 PM.]"
+      }
+    ]
+  },
+  {
+    "history": [
+      {
+        "role": "user",
+        "text": "paldi"
+      },
+      {
+        "role": "bot",
+        "text": "I found Paldi..."
+      }
+    ],
+    "message": "thaltej",
+    "rules": "Paldi to Thaltej, fare ₹15.\n1. Red Line: Paldi to Old High Court (2 stops)\n2. Blue Line: Old High Court to Thaltej (6 stops)\nAbout 8.2 km, 9 stations, roughly 22 min.",
+    "messages": [
+      {
+        "role": "user",
+        "content": "paldi"
+      },
+      {
+        "role": "assistant",
+        "content": "I found Paldi..."
+      },
+      {
+        "role": "user",
+        "content": "thaltej\n\n[Rider writes English. Reply in that language. Now in Ahmedabad: Wednesday 01 July 2026, 10:30 AM.]\n[Station facts: {\"station\": \"Thaltej\", \"status\": \"operational\", \"lines\": [\"Blue Line\"], \"is_interchange\": false, \"type\": \"Elevated\", \"entry_exit_gates\": [\"Gate No. 1\", \"Gate No. 2\", \"Gate No. 3\", \"Gate No. 4\"], \"lifts\": [\"Lift No. 01 near Gate No. 02\", \"Lift No. 02 near Gate No. 04\"]}]\n[Knowledge base excerpts:\nStation List by Line, Places Near Stations:\nRed Line (North-South Corridor, APMC to Koteshwar Road):\nAPMC, Jivraj Park, Rajivnagar, Shreyas, Paldi, Gandhigram, Old High Court, Usmanpura, Vijaynagar, Vadaj, Ranip, Sabarmati Railway Station, AEC, Sabarmati (work in progress), Motera Stadium, Koteshwar Road\n\nBlue Line (East-West Corridor, Thaltej Gam to Vastral Gam):\nThaltej Gam, Thaltej, Doordarshan Kendra, Gurukul Road, Gujarat University, Commerce Six Road, SP Stadium, Old High Court, Shahpur, Ghee Kanta, Kalupur Railway Station, Kankaria East, Apparel Park, Amraivadi, Rabari Colony, Vastral, Nirant Cross Road, Vastral Gam\n\nYellow Line (Corridor-1, Koteshwar Road to Mahatma Mandir):\nKoteshwar Road, Vishvakarma College, Tapovan Circle, Narmada Canal, Koba Circle, Juna Koba, Koba Gam, GNLU, Raysan, Randesan, Dholakuva Circle, Infocity, Sector-1, Sector-10A, Sachivalaya, Akshardham, Juna Sachivalaya, Sector-16, Sector-24, Mahatma Mandir\n\nViolet Line (Corridor-2, GNLU to Gift City):\nGNLU, PDEU, Gift City\n\nPink Line (Airport Corridor, Koteshwar Road to Airport, work in progress):\nKoteshwar Road, Ashram Road, Koteshwar Prachin Mandir, Sabarmati River, Sardarnagar, Airport\n\nLight Blue Line (GIFT City Extension, Gift City to Shahpur, work in progress):\nGift City, GIFT City House, Gujarat Biotechnology University, Shahpur (Gandhinagar)\n\nPlaces near stations: Kalupur Railway Station for Ahmedabad railway station; Sabarmati Railway Station for Sabarmati Junction; Kankaria East for Kankaria Lake; Motera Stadium for Narendra Modi Stadium; Akshardham for Akshardham temple, Gandhinagar; Mahatma Mandir for Mahatma Mandir convention centre; Gujarat University and Commerce Six Road for the university area; Old High Court and Usmanpura for Ashram Road; Gift City and PDEU for GIFT City and PDEU university. For any other place, use /nearest-stations.]"
+      }
+    ]
+  },
+  {
+    "history": [
+      {
+        "role": "user",
+        "text": "પાલડીથી ભાડું?"
+      },
+      {
+        "role": "bot",
+        "text": "..."
+      }
+    ],
+    "message": "થલતેજ",
+    "rules": "પાલડીથી થલતેજ સુધીનું ભાડું ₹15 છે.\nઅંતર લગભગ 8.2 કિમી, 9 સ્ટેશન, આશરે 22 મિનિટ. ઓલ્ડ હાઈકોર્ટ પર લાઇન બદલવી પડશે.",
+    "messages": [
+      {
+        "role": "user",
+        "content": "પાલડીથી ભાડું?"
+      },
+      {
+        "role": "assistant",
+        "content": "..."
+      },
+      {
+        "role": "user",
+        "content": "થલતેજ\n\n[Rider writes Gujarati (Gujarati script). Reply in that language. Now in Ahmedabad: Wednesday 01 July 2026, 10:30 AM.]\n[Station facts: {\"station\": \"Thaltej\", \"status\": \"operational\", \"lines\": [\"Blue Line\"], \"is_interchange\": false, \"type\": \"Elevated\", \"entry_exit_gates\": [\"Gate No. 1\", \"Gate No. 2\", \"Gate No. 3\", \"Gate No. 4\"], \"lifts\": [\"Lift No. 01 near Gate No. 02\", \"Lift No. 02 near Gate No. 04\"]}]"
+      }
+    ]
+  },
+  {
+    "history": [
+      {
+        "role": "user",
+        "text": "fare from paldi?"
+      },
+      {
+        "role": "bot",
+        "text": "..."
+      }
+    ],
+    "message": "paldi",
+    "rules": "I found Paldi. Which station are you travelling to or from?",
+    "messages": [
+      {
+        "role": "user",
+        "content": "fare from paldi?"
+      },
+      {
+        "role": "assistant",
+        "content": "..."
+      },
+      {
+        "role": "user",
+        "content": "paldi\n\n[Rider writes English. Reply in that language. Now in Ahmedabad: Wednesday 01 July 2026, 10:30 AM.]\n[Station facts: {\"station\": \"Paldi\", \"status\": \"operational\", \"lines\": [\"Red Line\"], \"is_interchange\": false, \"type\": \"Elevated\", \"entry_exit_gates\": [\"Gate No. 2\", \"Gate No. 3\"], \"lifts\": [\"Lift No. 02 near Gate No. 03\", \"Lift No. 06 near Gate No. 02\"]}]\n[Knowledge base excerpts:\nFares and Ticket Prices:\nFares are set by the stations you travel between (the app's fare matrix), not by the route you take. Ask the assistant for the fare between any two stations, or use the Plan Journey page (/routes).\n- Minimum fare: Rs 5. Within Ahmedabad (Phase 1) the maximum is Rs 25. Longer journeys to Gandhinagar and GIFT City cost up to Rs 40.\n- Fare steps: Rs 5, 10, 15, 20, 25, 30, 35, 40.\n- Examples: Thaltej Gam to Vastral Gam Rs 25; APMC to Motera Stadium Rs 20; Koteshwar Road to Mahatma Mandir Rs 25; APMC to Gift City Rs 30.\n- Smart card (GMRC CSC) and NCMC users get 10% off every completed journey.\n- Changing lines at an interchange costs nothing extra.\n\nStation List by Line, Places Near Stations:\nRed Line (North-South Corridor, APMC to Koteshwar Road):\nAPMC, Jivraj Park, Rajivnagar, Shreyas, Paldi, Gandhigram, Old High Court, Usmanpura, Vijaynagar, Vadaj, Ranip, Sabarmati Railway Station, AEC, Sabarmati (work in progress), Motera Stadium, Koteshwar Road\n\nBlue Line (East-West Corridor, Thaltej Gam to Vastral Gam):\nThaltej Gam, Thaltej, Doordarshan Kendra, Gurukul Road, Gujarat University, Commerce Six Road, SP Stadium, Old High Court, Shahpur, Ghee Kanta, Kalupur Railway Station, Kankaria East, Apparel Park, Amraivadi, Rabari Colony, Vastral, Nirant Cross Road, Vastral Gam\n\nYellow Line (Corridor-1, Koteshwar Road to Mahatma Mandir):\nKoteshwar Road, Vishvakarma College, Tapovan Circle, Narmada Canal, Koba Circle, Juna Koba, Koba Gam, GNLU, Raysan, Randesan, Dholakuva Circle, Infocity, Sector-1, Sector-10A, Sachivalaya, Akshardham, Juna Sachivalaya, Sector-16, Sector-24, Mahatma Mandir\n\nViolet Line (Corridor-2, GNLU to Gift City):\nGNLU, PDEU, Gift City\n\nPink Line (Airport Corridor, Koteshwar Road to Airport, work in progress):\nKoteshwar Road, Ashram Road, Koteshwar Prachin Mandir, Sabarmati River, Sardarnagar, Airport\n\nLight Blue Line (GIFT City Extension, Gift City to Shahpur, work in progress):\nGift City, GIFT City House, Gujarat Biotechnology University, Shahpur (Gandhinagar)\n\nPlaces near stations: Kalupur Railway Station for Ahmedabad railway station; Sabarmati Railway Station for Sabarmati Junction; Kankaria East for Kankaria Lake; Motera Stadium for Narendra Modi Stadium; Akshardham for Akshardham temple, Gandhinagar; Mahatma Mandir for Mahatma Mandir convention centre; Gujarat University and Commerce Six Road for the university area; Old High Court and Usmanpura for Ashram Road; Gift City and PDEU for GIFT City and PDEU university. For any other place, use /nearest-stations.]"
+      }
+    ]
+  },
+  {
+    "history": [
+      {
+        "role": "user",
+        "text": "is there a student pass?"
+      },
+      {
+        "role": "bot",
+        "text": "No."
+      }
+    ],
+    "message": "and for seniors?",
+    "rules": null,
+    "messages": [
+      {
+        "role": "user",
+        "content": "is there a student pass?"
+      },
+      {
+        "role": "assistant",
+        "content": "No."
+      },
+      {
+        "role": "user",
+        "content": "and for seniors?\n\n[Rider writes English. Reply in that language. Now in Ahmedabad: Wednesday 01 July 2026, 10:30 AM.]\n[Knowledge base excerpts:\nPasses, Student and Senior Citizen Concessions, Discounts:\n- GMRC does not offer any student pass, daily pass, monthly pass, trip pass or unlimited-travel pass. The official fare products are only single journey, return journey and group tickets.\n- There is no student, senior citizen or other concession fare. Students pay the normal fare.\n- The cheapest way to travel often (for example daily to college or work) is a GMRC smart card (Ahmedabad journeys) or an NCMC card (whole network, including Gandhinagar and GIFT City), which gives 10% off every journey. A return journey ticket saves buying a second ticket for the way back.\n- Children: up to two children under 3 feet tall travel free when accompanied by an adult.\n- Policies can change; for the latest, ask GMRC customer care (+91-79-22960123, care@gujaratmetrorail.com) or at a station ticket counter.\n\nStations Not Open Yet (Airport, Sabarmati, New Lines):\n- Sabarmati station (Red Line, between AEC and Motera Stadium) is work in progress. Trains pass through without stopping; riders cannot board or get off there yet, and it has no fare yet. Use AEC or Motera Stadium instead. Sabarmati Railway Station (also Red Line) is open.\n- Pink Line stations, not running yet: Ashram Road, Koteshwar Prachin Mandir, Sabarmati River, Sardarnagar, Airport (underground). There is no metro to Ahmedabad airport yet; the nearest open stations are on the Red Line (for example Koteshwar Road or Motera Stadium), then a taxi or auto.\n- Light Blue Line stations, not running yet: GIFT City House, Gujarat Biotechnology University, Shahpur (Gandhinagar). This Shahpur is near GIFT City, not the Shahpur station on the Blue Line.\n- Fares for work-in-progress stations have not been published yet.]"
+      }
+    ]
+  },
+  {
+    "history": [
+      {
+        "role": "user",
+        "text": "hi"
+      },
+      {
+        "role": "bot",
+        "text": "Hello"
+      }
+    ],
+    "message": "and the refund?",
+    "rules": null,
+    "messages": [
+      {
+        "role": "user",
+        "content": "hi"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello"
+      },
+      {
+        "role": "user",
+        "content": "and the refund?\n\n[Rider writes English. Reply in that language. Now in Ahmedabad: Wednesday 01 July 2026, 10:30 AM.]\n[Knowledge base excerpts:\nRefunds:\n- Only unused paper QR tickets and tokens can be refunded, within 30 minutes of purchase, at the station where they were bought.\n- No partial refunds.\n- Mobile QR tickets and group QR tickets cannot be refunded.\n- No refund for used tickets or lost tokens and cards.\n\nSmart Card (GMRC CSC):\n- Buy at any operational station for Rs 100: Rs 50 refundable security deposit plus Rs 50 travel value. Pay by cash or card.\n- 10% discount on every completed journey.\n- Valid only for journeys within Phase 1 (Ahmedabad: Blue Line, and Red Line from APMC to Motera Stadium), not for journeys to Gandhinagar or GIFT City.\n- Recharge at stations (ticket counter or recharge machines) or in the official app. Station recharges are in multiples of Rs 50; the card holds up to Rs 3000.\n- You need at least the minimum fare on the card to enter. The fare is deducted at the exit gate. Entering and leaving at the same station deducts the minimum fare.\n- Tap in at entry and tap out at exit, every time. A missing tap causes an entry-exit mismatch that must be fixed at a station customer care counter.\n- The card can be shared with friends or family, but only one person can travel on it at a time.\n- Check the balance at a ticket vending machine or recharge machine.\n- Valid for 5 years from the last recharge.\n- Refund: travel value is never refunded in cash. Surrendering a readable card refunds the security deposit minus a Rs 20 admin charge (and any negative balance). For a card that cannot be read, the remaining value is moved to a new card within 7 days.\n- Lost cards: GMRC is not responsible and the value is lost. Report a lost card at any station.\n\nNCMC (National Common Mobility Card):\n- An NCMC card (\"One Nation One Card\", for example a RuPay debit or prepaid card with the NCMC symbol) from any bank is accepted on the whole GMRC network, including the Gandhinagar and GIFT City lines.\n- Get one from a bank that issues NCMC cards. It also works on other NCMC-enabled transport.\n- 10% discount on every completed journey.\n- Top up through your bank (online). Then validate the added value at a customer care window at any station before travelling.\n- Tap in and tap out like a smart card. The gate will not open at exit if the balance is too low; top up to exit.\n- Refunds, replacements and disputes about the card are handled by the issuing bank; GMRC only fixes travel issues such as entry-exit mismatches.]"
+      }
+    ]
+  },
+  {
+    "history": [
+      {
+        "role": "user",
+        "text": "what is the refund policy"
+      },
+      {
+        "role": "bot",
+        "text": "Unused tickets..."
+      }
+    ],
+    "message": "gift city",
+    "rules": "I found Gift City. Which station are you travelling to or from?",
+    "messages": [
+      {
+        "role": "user",
+        "content": "what is the refund policy"
+      },
+      {
+        "role": "assistant",
+        "content": "Unused tickets..."
+      },
+      {
+        "role": "user",
+        "content": "gift city\n\n[Rider writes English. Reply in that language. Now in Ahmedabad: Wednesday 01 July 2026, 10:30 AM.]\n[Station facts: {\"station\": \"Gift City\", \"status\": \"operational\", \"lines\": [\"Violet Line\", \"Light Blue Line\"], \"is_interchange\": true, \"type\": \"Elevated\", \"entry_exit_gates\": [\"Gate No. 1\", \"Gate No. 2\"], \"lifts\": [\"Lift No. 04 near Gate No. 01\", \"Lift No. 03 near Gate No. 02\"]}]\n[Knowledge base excerpts:\nRefunds:\n- Only unused paper QR tickets and tokens can be refunded, within 30 minutes of purchase, at the station where they were bought.\n- No partial refunds.\n- Mobile QR tickets and group QR tickets cannot be refunded.\n- No refund for used tickets or lost tokens and cards.\n\nTrain Frequency and Gandhinagar / GIFT City Train Times:\nBlue Line (East-West, Thaltej Gam to Vastral Gam):\n- Weekday peak hours: every 9 minutes\n- Weekday off-peak: every 10 minutes\n- Weekends: every 12 minutes\n\nRed Line (North-South, APMC to Koteshwar Road):\n- Weekday peak hours: every 10 minutes\n- Weekday off-peak: every 12 minutes\n- Weekends: every 12 minutes\n\nYellow Line (Koteshwar Road to Mahatma Mandir, Gandhinagar):\n- Served by through trains from APMC (Red Line) that continue to Mahatma Mandir, so riders from APMC to Gandhinagar do not need to change trains.\n- About every 24 minutes. 34 trains a day each way. First train from APMC 6:20 AM, last 8:45 PM; first train from Mahatma Mandir 6:40 AM, last 9:00 PM.\n\nViolet Line (GNLU to Gift City):\n- 8 through trains a day each way between APMC and Gift City, mostly in the morning and evening peaks. From APMC: 6:45, 7:34, 8:03, 9:11 AM and 3:16, 4:03, 5:16, 6:06 PM. From Gift City: 7:48, 8:37, 9:01, 10:18 AM and 4:17, 5:08, 6:21, 7:13 PM.\n- Between these trains there is no Violet Line service, so check /schedule before travelling to GIFT City.\n\nPink Line and Light Blue Line: not running yet (work in progress).\n\nPeak hours on weekdays: 8:00 AM to 11:00 AM and 5:00 PM to 8:00 PM.\n\nPasses, Student and Senior Citizen Concessions, Discounts:\n- GMRC does not offer any student pass, daily pass, monthly pass, trip pass or unlimited-travel pass. The official fare products are only single journey, return journey and group tickets.\n- There is no student, senior citizen or other concession fare. Students pay the normal fare.\n- The cheapest way to travel often (for example daily to college or work) is a GMRC smart card (Ahmedabad journeys) or an NCMC card (whole network, including Gandhinagar and GIFT City), which gives 10% off every journey. A return journey ticket saves buying a second ticket for the way back.\n- Children: up to two children under 3 feet tall travel free when accompanied by an adult.\n- Policies can change; for the latest, ask GMRC customer care (+91-79-22960123, care@gujaratmetrorail.com) or at a station ticket counter.]"
+      }
+    ]
+  }
+]

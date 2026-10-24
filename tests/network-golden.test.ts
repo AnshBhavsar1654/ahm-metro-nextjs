@@ -5,15 +5,8 @@
 import { readFileSync } from "node:fs"
 import path from "node:path"
 import { describe, expect, it } from "vitest"
-import {
-  calculateRouteDetails,
-  getAllStations,
-  getFare,
-  getLineGeometries,
-  isOperational,
-  resolveStation,
-} from "@/domain/metro/network"
-import { journeyMinutes, journeyTrains, stayOnTrain, throughService } from "@/domain/metro/timetable"
+import { getAllStations, getLineGeometries } from "@/domain/metro/network"
+import { faresFrom, routePayload as apiRoutePayload } from "@/server/metro-api"
 
 const GOLDEN = path.resolve(import.meta.dirname, "fixtures", "golden")
 const load = (name: string): unknown => JSON.parse(readFileSync(path.join(GOLDEN, name), "utf8"))
@@ -21,41 +14,8 @@ const load = (name: string): unknown => JSON.parse(readFileSync(path.join(GOLDEN
 /** The fixed moment the fixtures were captured at (a Wednesday, metro running). */
 const NOW = { hour: 10, minute: 30 }
 
-/** Exactly the dict backend/app.py's /api/route handler builds (minus the HTTP wrapper). */
-function routePayload(source: string, destination: string) {
-  const result = calculateRouteDetails(source, destination)
-  if (result.error) return { error: result.error }
-  const stays = [...stayOnTrain(result.legs), false]
-  return {
-    route: result.route,
-    interchanges: result.interchanges,
-    distance: result.distance,
-    instructions: result.instructions,
-    geometry: result.geometry,
-    legs: result.legs.map((leg, i) => ({ ...leg, stay_on_train: stays[i] })),
-    duration_minutes: journeyMinutes(result.legs),
-    through_service: throughService(result.legs),
-    next_trains: journeyTrains(result.legs, NOW),
-    not_operational: result.not_operational,
-    alternatives: (result.alternatives ?? []).map((alt) => ({
-      route: alt.route,
-      legs: alt.legs,
-      interchanges: alt.interchanges,
-      distance: alt.distance,
-      duration_minutes: journeyMinutes(alt.legs),
-    })),
-  }
-}
-
-/** Exactly backend/app.py's fares_from(). */
-function faresFrom(source: string) {
-  const resolved = resolveStation(source)
-  if (!resolved) return { error: "Unknown station" }
-  if (!isOperational(resolved)) return []
-  return getAllStations()
-    .filter((s) => s !== resolved)
-    .map((s) => ({ station: s, fare: getFare(resolved, s) }))
-}
+/** The /api/route and /api/fares/from payloads, from the module the route handlers use. */
+const routePayload = (source: string, destination: string) => apiRoutePayload(source, destination, NOW)
 
 describe("golden parity: network domain", () => {
   it("stations list (alphabetical)", () => {

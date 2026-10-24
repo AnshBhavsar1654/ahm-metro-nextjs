@@ -20,8 +20,8 @@ import {
   round,
 } from "../src/domain/metro/excel-parse"
 
-const DATA_DIR = path.join(import.meta.dirname, "..", "backend", "data")
-const NETWORK = JSON.parse(fs.readFileSync(path.join(DATA_DIR, "network.json"), "utf8"))
+const DATA_DIR = path.join(import.meta.dirname, "..", "data")
+const NETWORK = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "..", "src", "data", "network.json"), "utf8"))
 
 const problems: string[] = []
 

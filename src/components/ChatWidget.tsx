@@ -1,0 +1,403 @@
+"use client"
+
+import { useCallback, useEffect, useRef, useState } from "react"
+import Link from "next/link"
+import { Send, TrainFront, X, RefreshCw, User } from "lucide-react"
+import { API_URL } from "@/lib/api"
+import { useI18n, type I18n } from "@/i18n"
+import type { Icon } from "@/lib/types"
+
+const ENDPOINT = `${API_URL}/api/chat/stream`
+const FIRST_BYTE_TIMEOUT_MS = 60000 // free hosting can take ~50s to wake up
+const IDLE_TIMEOUT_MS = 20000 // once the answer is streaming, a long silence means it stalled
+const MAX_LENGTH = 1000
+const HISTORY_TURNS = 8
+
+// Suggestions are translation keys: tapping one asks the question in the rider's language.
+const SUGGESTIONS = ["chat.suggest1", "chat.suggest2", "chat.suggest3"]
+
+// Site paths the assistant may mention, and the page name (translation key) shown as the link.
+const PAGE_LABELS: Record<string, string> = {
+  "/nearest-stations": "nav.nearest",
+  "/routes": "nav.routes",
+  "/stations": "nav.stations",
+  "/stations-info": "nav.stationsInfo",
+  "/schedule": "nav.schedule",
+  "/facilities": "nav.facilities",
+  "/contact": "nav.contact",
+}
+
+// Turns site paths, URLs and **bold** in a bot reply into real links; everything else stays plain text.
+const TOKEN =
+  /(\/(?:nearest-stations|stations-info|stations|routes|schedule|facilities|contact)(?![\w-])|https?:\/\/[^\s)]+|\*\*[^*]+\*\*)/g
+
+const renderMessage = (text: string, t: I18n["t"]) =>
+  text.split(TOKEN).map((part, i) => {
+    if (Object.prototype.hasOwnProperty.call(PAGE_LABELS, part)) {
+      return (
+        <Link key={i} href={part} className="font-semibold text-accent underline underline-offset-2">
+          {t(PAGE_LABELS[part]!)}
+        </Link>
+      )
+    }
+    if (/^https?:\/\//.test(part)) {
+      return (
+        <a
+          key={i}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-accent underline underline-offset-2"
+        >
+          {part}
+        </a>
+      )
+    }
+    if (/^\*\*[^*]+\*\*$/.test(part)) return <strong key={i}>{part.slice(2, -2)}</strong>
+    return part
+  })
+
+// Reads the server-sent events from /api/chat/stream: {type: 'delta', text} pieces, then {type: 'done'}.
+type ChatEvent = { type: "delta"; text: string } | { type: "done"; source: string }
+
+async function* readEvents(response: Response): AsyncGenerator<ChatEvent> {
+  const reader = response.body!.getReader()
+  const decoder = new TextDecoder()
+  let buffer = ""
+  for (;;) {
+    const { value, done } = await reader.read()
+    if (done) break
+    buffer += decoder.decode(value, { stream: true })
+    let end
+    while ((end = buffer.indexOf("\n\n")) !== -1) {
+      const block = buffer.slice(0, end)
+      buffer = buffer.slice(end + 2)
+      const data = block
+        .split("\n")
+        .filter((l) => l.startsWith("data: "))
+        .map((l) => l.slice(6))
+        .join("\n")
+      if (data) yield JSON.parse(data) as ChatEvent
+    }
+  }
+}
+
+let nextId = 0
+type Message = {
+  id: number
+  role: "user" | "bot"
+  text: string
+  greeting?: boolean
+  error?: boolean
+  retry?: string
+  userId?: number
+}
+const makeMessage = (role: Message["role"], text: string, extra: Partial<Message> = {}): Message => ({
+  id: ++nextId,
+  role,
+  text,
+  ...extra,
+})
+
+const Avatar = ({ icon: Icon }: { icon: Icon }) => (
+  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line-200 bg-navy-100">
+    <Icon strokeWidth={1.75} size={16} className="text-accent" />
+  </div>
+)
+
+function ChatWidget() {
+  const { t, lang } = useI18n()
+  const [isOpen, setIsOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [input, setInput] = useState("")
+  const [unread, setUnread] = useState(0)
+  const [messages, setMessages] = useState(() => [makeMessage("bot", "", { greeting: true })])
+
+  const listRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const abortRef = useRef<AbortController | null>(null)
+  const isOpenRef = useRef(false)
+
+  useEffect(() => {
+    isOpenRef.current = isOpen
+    if (isOpen) {
+      setUnread(0)
+      inputRef.current?.focus()
+    }
+  }, [isOpen])
+
+  useEffect(() => {
+    const el = listRef.current
+    if (el) el.scrollTop = el.scrollHeight
+  }, [messages, isLoading, isOpen])
+
+  useEffect(() => {
+    if (!isOpen) return undefined
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false)
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [isOpen])
+
+  useEffect(() => () => abortRef.current?.abort(), [])
+
+  // Wake the backend as soon as the page loads, so a sleeping free-tier server is up before the first question.
+  useEffect(() => {
+    fetch(`${API_URL}/health`).catch(() => {})
+  }, [])
+
+  const send = useCallback(
+    async (rawText: string, retryOf: Message | null = null) => {
+      const text = rawText.trim()
+      if (!text || isLoading) return
+
+      const history = messages
+        .filter((m) => !m.greeting && !m.error && m.id !== retryOf?.userId)
+        .slice(-HISTORY_TURNS)
+        .map((m) => ({ role: m.role, text: m.text }))
+
+      const userMessage = makeMessage("user", text)
+      // A retry replaces the failed exchange instead of stacking a duplicate under it.
+      setMessages((prev) => [...prev.filter((m) => m.id !== retryOf?.id && m.id !== retryOf?.userId), userMessage])
+      setInput("")
+      setIsLoading(true)
+
+      const controller = new AbortController()
+      abortRef.current = controller
+      let timer = setTimeout(() => controller.abort(), FIRST_BYTE_TIMEOUT_MS)
+      const resetTimer = () => {
+        clearTimeout(timer)
+        timer = setTimeout(() => controller.abort(), IDLE_TIMEOUT_MS)
+      }
+
+      const botId = ++nextId
+      let streamed = ""
+      const showBot = (text: string, extra: Partial<Message> = {}) =>
+        setMessages((prev) => [...prev.filter((m) => m.id !== botId), { id: botId, role: "bot" as const, text, ...extra }])
+      const fail = (message: string) =>
+        showBot(streamed ? `${streamed}\n\n${message}` : message, { error: true, retry: text, userId: userMessage.id })
+
+      try {
+        const resp = await fetch(ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text, history }),
+          signal: controller.signal,
+        })
+        if (!resp.ok || !resp.body) {
+          const data = await resp.json().catch(() => ({}))
+          // The server's messages are English; other languages get the translated general one.
+          fail(lang === "en" && data.error ? data.error : t("chat.problem"))
+        } else {
+          resetTimer()
+          for await (const event of readEvents(resp)) {
+            resetTimer()
+            if (event.type === "delta") {
+              streamed += event.text
+              if (abortRef.current !== controller) return
+              showBot(streamed)
+            }
+          }
+          if (!streamed.trim()) showBot(t("chat.noAnswer"))
+        }
+      } catch {
+        if (controller.signal.aborted && abortRef.current !== controller) return // chat was cleared
+        fail(controller.signal.aborted ? t("chat.slow") : t("chat.offline"))
+      } finally {
+        clearTimeout(timer)
+      }
+
+      if (abortRef.current !== controller) return
+      abortRef.current = null
+      setIsLoading(false)
+      if (!isOpenRef.current) setUnread((n) => n + 1)
+      inputRef.current?.focus()
+    },
+    [messages, isLoading, t, lang],
+  )
+
+  const clearChat = () => {
+    abortRef.current?.abort()
+    abortRef.current = null
+    setMessages([makeMessage("bot", "", { greeting: true })])
+    setInput("")
+    setIsLoading(false)
+  }
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    send(input)
+  }
+
+  const showSuggestions = messages.length === 1 && !isLoading
+  // Typing dots until the first words arrive; after that the answer itself grows.
+  const showTyping = isLoading && messages[messages.length - 1]?.role === "user"
+
+  return (
+    <>
+      {isOpen && (
+        <button
+          type="button"
+          aria-label={t("chat.close")}
+          tabIndex={-1}
+          onClick={() => setIsOpen(false)}
+          className="fixed inset-0 z-[59] bg-black/25 md:hidden"
+        />
+      )}
+
+      <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-[calc(1rem+env(safe-area-inset-right))] z-[60]">
+        {isOpen && (
+          <div
+            role="dialog"
+            aria-label={t("chat.title")}
+            className="fixed bottom-[calc(5.75rem+env(safe-area-inset-bottom))] right-[calc(1rem+env(safe-area-inset-right))] top-[calc(5rem+env(safe-area-inset-top))] flex min-h-0 w-[calc(100vw-2rem)] max-w-[420px] flex-col overflow-hidden rounded-xl border border-line-200 bg-surface-1 shadow-lg"
+          >
+            <div className="flex items-center justify-between gap-3 bg-navy-900 px-5 py-4 text-white">
+              <div className="flex min-w-0 items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-white/20 bg-white/10">
+                  <TrainFront strokeWidth={1.75} size={20} />
+                </div>
+                <div className="min-w-0">
+                  <div className="truncate font-sans text-base font-semibold leading-tight">{t("chat.title")}</div>
+                  <div className="mt-0.5 text-xs text-white/70">{t("chat.subtitle")}</div>
+                </div>
+              </div>
+
+              <div className="flex shrink-0 items-center gap-2">
+                <button
+                  type="button"
+                  onClick={clearChat}
+                  className="flex h-9 w-9 items-center justify-center rounded-md bg-white/10 transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  aria-label={t("chat.newChat")}
+                  title={t("chat.newChat")}
+                >
+                  <RefreshCw strokeWidth={1.75} size={16} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  className="flex h-9 w-9 items-center justify-center rounded-md bg-white/10 transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  aria-label={t("chat.close")}
+                >
+                  <X strokeWidth={1.75} size={20} />
+                </button>
+              </div>
+            </div>
+
+            <div
+              ref={listRef}
+              role="log"
+              aria-live="polite"
+              className="min-h-0 flex-1 space-y-4 overflow-y-auto bg-surface-0 px-4 py-5"
+            >
+              {messages.map((m) => (
+                <div key={m.id} className={`flex gap-3 ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+                  {m.role === "bot" && <Avatar icon={TrainFront} />}
+                  <div
+                    className={
+                      "max-w-[78%] whitespace-pre-wrap break-words rounded-lg px-4 py-3 text-sm leading-relaxed " +
+                      (m.role === "user"
+                        ? "bg-navy-900 text-white"
+                        : m.error
+                          ? "border border-alert-600/40 bg-surface-1 text-ink-900"
+                          : "border border-line-200 bg-surface-1 text-ink-900")
+                    }
+                  >
+                    {m.greeting ? t("chat.greeting") : m.role === "bot" ? renderMessage(m.text, t) : m.text}
+                    {m.error && m.retry && !isLoading && (
+                      <button
+                        type="button"
+                        onClick={() => send(m.retry!, m)}
+                        className="mt-2 block rounded-md border border-line-200 px-3 py-1 text-xs font-semibold text-accent transition hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      >
+                        {t("chat.tryAgain")}
+                      </button>
+                    )}
+                  </div>
+                  {m.role === "user" && <Avatar icon={User} />}
+                </div>
+              ))}
+
+              {showSuggestions && (
+                <div className="flex flex-wrap gap-2 pl-11">
+                  {SUGGESTIONS.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => send(t(s))}
+                      className="rounded-full border border-line-200 bg-surface-1 px-3 py-1.5 text-xs font-medium text-ink-900 transition hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      {t(s)}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {showTyping && (
+                <div className="flex justify-start gap-3" role="status" aria-label={t("chat.typing")}>
+                  <Avatar icon={TrainFront} />
+                  <div className="flex items-center gap-1 rounded-lg border border-line-200 bg-surface-1 px-4 py-4">
+                    {[0, 150, 300].map((delay) => (
+                      <span
+                        key={delay}
+                        className="h-2 w-2 animate-bounce rounded-full bg-navy-900"
+                        style={{ animationDelay: `${delay}ms` }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <form onSubmit={onSubmit} className="border-t border-line-200 bg-surface-1 px-4 py-4">
+              <div className="flex items-center gap-3">
+                <label htmlFor="chat-input" className="sr-only">
+                  {t("chat.ask")}
+                </label>
+                <input
+                  id="chat-input"
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  maxLength={MAX_LENGTH}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder={t("chat.ask")}
+                  autoComplete="off"
+                  className="flex-1 rounded-md border border-line-200 bg-surface-0 px-4 py-3 text-sm text-ink-900 transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                />
+                <button
+                  type="submit"
+                  disabled={isLoading || !input.trim()}
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-navy-900 text-white transition hover:bg-navy-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-ink-300"
+                  aria-label={t("chat.send")}
+                >
+                  <Send strokeWidth={1.75} size={18} />
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+
+        <button
+          type="button"
+          onClick={() => setIsOpen((open) => !open)}
+          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-navy-900 shadow-lg transition hover:bg-navy-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+          aria-label={isOpen ? t("chat.close") : unread ? t("chat.openUnread", { n: unread }) : t("chat.open")}
+          aria-expanded={isOpen}
+        >
+          {isOpen ? (
+            <X strokeWidth={1.75} size={26} className="text-white" />
+          ) : (
+            <TrainFront strokeWidth={1.75} size={28} className="text-white" />
+          )}
+          {!isOpen && unread > 0 && (
+            <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white bg-alert-600 font-mono text-[10px] font-semibold text-white">
+              {unread}
+            </span>
+          )}
+        </button>
+      </div>
+    </>
+  )
+}
+
+export default ChatWidget

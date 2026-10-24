@@ -6,14 +6,17 @@ assembly mirrors backend/app.py's GET /api/route handler field-for-field; depart
 next-trains are pinned to a fixed IST moment (2026-07-01 10:30) so the fixtures are stable.
 
     cd <repo root>
-    python scripts/capture-golden.py
+    BACKEND_DIR=<original repo>/backend python scripts/capture-golden.py
 """
 import json
 import os
 import sys
 from datetime import datetime, timedelta, timezone
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "backend"))
+# The FastAPI backend these fixtures were captured from (deleted from this repo at cutover): point
+# BACKEND_DIR at the original Ahmedabad Metro repository's backend/ folder to recapture.
+BACKEND_DIR = os.environ.get("BACKEND_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "Ahmedabad Metro", "backend"))
+sys.path.insert(0, BACKEND_DIR)
 
 from metro.locations import get_nearby_stations_data, get_stations_with_coordinates  # noqa: E402
 from metro.network import (  # noqa: E402
