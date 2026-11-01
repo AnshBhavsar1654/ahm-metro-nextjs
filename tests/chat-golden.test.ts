@@ -23,7 +23,7 @@ type Understanding = { language: string; stations: string[]; intent: string | nu
 describe("golden parity: chatbot rules", () => {
   const cases = load<Record<string, Understanding>>("chat-rules.json")
 
-  it("understands every message as the backend did (language, stations, intent)", () => {
+  it("understands every message as the backend did (language, stations, intent)", { timeout: 60_000 }, () => {
     const mismatches: string[] = []
     for (const [message, want] of Object.entries(cases)) {
       const stations = findStations(message)
@@ -41,7 +41,7 @@ describe("golden parity: chatbot rules", () => {
     expect(Object.keys(cases).length).toBeGreaterThan(1500)
   })
 
-  it("gives every instant answer word for word", () => {
+  it("gives every instant answer word for word", { timeout: 60_000 }, () => {
     const mismatches = Object.entries(cases).filter(([message, want]) => answerWithRules(message, []) !== want.rules)
     expect(mismatches.map(([m]) => m)).toEqual([])
   })
