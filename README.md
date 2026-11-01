@@ -50,12 +50,12 @@ All optional; see [.env.example](.env.example).
 | `GEMINI_TEMPERATURE`, `GEMINI_MAX_OUTPUT_TOKENS` | `0.2`, `1024` | |
 | `LLM_CONCURRENCY` | `8` | Model calls running at once. |
 | `CHAT_LIMIT_PER_MINUTE` | `20` | Chat messages per client IP per minute. |
+| `MAPS_API_KEY` | none | Google Places (New), used only for the Nearest Stations place search (server-side; see below). Without it, or without Redis, the search uses OpenStreetMap Nominatim. |
+| `PLACES_MONTHLY_BUDGET`, `PLACES_DAILY_CAP` | `8000`, `400` | Google calls allowed per SKU per month / per day. These can only lower the built-in limits. |
 | `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` | none | Shared state in Upstash Redis (also `KV_REST_API_URL` / `KV_REST_API_TOKEN`). |
 | `REDIS_PREFIX` | `metro` | Key prefix in Redis. |
 | `VISITS_FILE` | `.data/visits.json` | Where the visit total is saved when Redis isn't configured. |
 | `NEXT_PUBLIC_WEATHER_API_KEY`, `NEXT_PUBLIC_WEATHER_CITY` | none, `Ahmedabad,IN` | OpenWeatherMap for the home page. |
-| `RENDER_EXTERNAL_URL` / `KEEPALIVE_URL` | set by Render | When present, the server pings its own `/health` every 10 minutes between 06:00 and 23:00 IST. |
-| `KEEPALIVE_INTERVAL_SECONDS`, `KEEPALIVE_START_HOUR`, `KEEPALIVE_END_HOUR` | `600`, `6`, `23` | |
 
 ### Shared state: Upstash Redis
 
@@ -64,10 +64,18 @@ models' cooldowns live in a small store (`src/server/store.ts`). With Upstash cr
 by every server instance and kept across deploys. Without them it lives in the server process, as the FastAPI
 backend did, and the visit total is saved to `.data/visits.json`.
 
+### Google Places: free usage only
+
+`src/server/places.ts` proxies Places Autocomplete (New) and Place Details (New, `location` field only) for the
+Nearest Stations search. The key stays on the server. Google gives 10,000 free calls a month for each SKU, so
+each SKU stops at 8,000 for the rest of the month (Pacific time, as Google bills). Each client IP gets 30
+suggestions a minute and 200 a day, and all clients together get 60 a minute and 400 a day. Details is allowed
+only for a place the autocomplete just offered in that session. Once any limit is reached, or if Redis can't be
+reached, the search falls back to Nominatim. In Google Cloud, restrict the key to Places API (New) and set
+per-day quotas as a backstop.
+
 ## Deploying
 
-- **Render**: `render.yaml` describes the web service (build with Bun, `bun run start`). Add `GEMINI_API_KEY`,
-  and the Upstash variables so the visit count survives deploys (Render's free disk is wiped on each one).
 - **Vercel** (or any serverless host): works with Upstash Redis configured; without it each function instance
   keeps its own counters. The chat endpoint streams for up to 60 s (`maxDuration`).
 
@@ -79,7 +87,7 @@ src/
   components/       the UI (ported from the CRA app)
   domain/metro/     network and routing, fares, timetable, nearby stations, the network build
   domain/chat/      the assistant: rules, retrieval, tools, agent, orchestration
-  server/           HTTP helpers, the shared store, visit counter, keep-alive, endpoint payloads
+  server/           HTTP helpers, the shared store, visit counter, endpoint payloads
   i18n/  lib/       translations; client-side network data, theme, router helpers
   data/             runtime data: network.json, timetable.json, metro_kb.txt, stationData.json
 data/               build inputs: Location.xlsx, Fare Matrix.xlsx, tracks.json

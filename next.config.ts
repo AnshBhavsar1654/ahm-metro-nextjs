@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     "/api/chat/stream": ["./src/data/metro_kb.txt"],
   },
   async rewrites() {
-    // FastAPI served GET /health; the keep-alive ping and the chat widget's warm-up still use it.
+    // FastAPI served GET /health; the chat widget's warm-up still uses it.
     return [{ source: "/health", destination: "/api/health" }]
   },
 }

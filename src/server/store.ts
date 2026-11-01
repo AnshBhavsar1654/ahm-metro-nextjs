@@ -20,8 +20,11 @@ export interface Store {
   /** ttlSeconds: the value disappears after that long. */
   set(key: string, value: unknown, ttlSeconds?: number): Promise<void>
   del(key: string): Promise<void>
-  /** Adds one and returns the new value; null if the store is unavailable. */
-  incr(key: string): Promise<number | null>
+  /**
+   * Adds one and returns the new value; null if the store is unavailable. ttlSeconds: a new key
+   * disappears after that long (an existing key keeps its expiry).
+   */
+  incr(key: string, ttlSeconds?: number): Promise<number | null>
   /**
    * Sliding-window limit (a deque of hit times per key, as backend/app.py kept): records a hit and
    * returns true unless `limit` hits already happened in the last `windowSeconds`.
@@ -102,8 +105,12 @@ export class RedisStore implements Store {
     })
   }
 
-  incr(key: string): Promise<number | null> {
-    return this.safe("incr", null, () => this.redis.incr(PREFIX + key))
+  incr(key: string, ttlSeconds?: number): Promise<number | null> {
+    return this.safe("incr", null, async () => {
+      const value = await this.redis.incr(PREFIX + key)
+      if (ttlSeconds && value === 1) await this.redis.expire(PREFIX + key, Math.max(1, Math.round(ttlSeconds)))
+      return value
+    })
   }
 
   hit(key: string, windowSeconds: number, limit: number): Promise<boolean> {
@@ -168,9 +175,10 @@ export class MemoryStore implements Store {
     this.values.delete(key)
   }
 
-  async incr(key: string): Promise<number> {
+  async incr(key: string, ttlSeconds?: number): Promise<number> {
     const next = Number((await this.get<number>(key)) ?? 0) + 1
-    this.values.set(key, { value: next, expires: this.live(key)?.expires ?? Infinity })
+    const expires = this.live(key)?.expires ?? (ttlSeconds ? Date.now() + ttlSeconds * 1000 : Infinity)
+    this.values.set(key, { value: next, expires })
     return next
   }
 

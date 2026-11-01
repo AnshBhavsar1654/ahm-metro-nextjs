@@ -1,7 +1,7 @@
 // @vitest-environment node
 /**
  * The HTTP layer — the ports of backend/tests' TestClient checks: the metro endpoints, chat streaming
- * and its limits, visits (counter, limit per IP, live stream), keep-alive and the shared store.
+ * and its limits, visits (counter, limit per IP, live stream) and the shared store.
  */
 import { mkdtempSync } from "node:fs"
 import { tmpdir } from "node:os"
@@ -18,7 +18,6 @@ import { POST as route } from "@/app/api/route/route"
 import { GET as nearby } from "@/app/api/stations/nearby/route"
 import { GET as stations } from "@/app/api/stations/route"
 import { GET as visitsNow, POST as recordVisit } from "@/app/api/visits/route"
-import { active, startKeepalive } from "@/server/keepalive"
 import { MemoryStore, setStore } from "@/server/store"
 import { MAX_VISITS_PER_IP_PER_HOUR, VisitCounter } from "@/server/visits"
 
@@ -178,35 +177,6 @@ describe("visits", () => {
       total: number
     }
     expect(after.total).toBe(before + 1)
-  })
-})
-
-describe("keep-alive", () => {
-  afterEach(() => {
-    for (const name of ["KEEPALIVE_START_HOUR", "KEEPALIVE_END_HOUR", "RENDER_EXTERNAL_URL", "KEEPALIVE_URL"])
-      delete process.env[name]
-  })
-
-  it("does nothing without a URL", () => {
-    startKeepalive()() // returns a no-op stop function and starts no timer
-  })
-
-  it.each([
-    [5, false],
-    [6, true],
-    [22, true],
-    [23, false],
-  ])("is active at %i:00 IST: %s", (hour, expected) => {
-    expect(active({ hour, minute: 0 })).toBe(expected)
-  })
-
-  it("takes the window from the environment", () => {
-    process.env.KEEPALIVE_START_HOUR = "8"
-    process.env.KEEPALIVE_END_HOUR = "20"
-    expect(active({ hour: 7, minute: 0 })).toBe(false)
-    expect(active({ hour: 19, minute: 0 })).toBe(true)
-    process.env.KEEPALIVE_START_HOUR = "not-a-number"
-    expect(active({ hour: 6, minute: 0 })).toBe(true) // falls back to 6
   })
 })
 

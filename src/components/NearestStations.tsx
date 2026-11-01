@@ -30,11 +30,12 @@ type NearbyStation = {
   path: LatLng[] | null
 }
 
-/** A place to search from: a Nominatim suggestion, a recent search or a landmark. */
+/** A place to search from: a Google or Nominatim suggestion, a recent search or a landmark. */
 type Place = {
   name?: string
   display_name?: string
   place_id?: number
+  google_id?: string
   lat?: string | number
   lon?: string | number
   lng?: number
@@ -285,6 +286,9 @@ const NearestStations = () => {
   const [resolvingLink, setResolvingLink] = useState(false)
 
   const latestRequest = useRef(0)
+  // Google Places through our server (src/server/places.ts), until it says to fall back to Nominatim.
+  const googleSearch = useRef(true)
+  const placesSession = useRef<string | null>(null)
 
   useEffect(() => {
     const close = () => setShowDropdown(false)
@@ -305,7 +309,44 @@ const NearestStations = () => {
     updateHistory(recentSearches.filter((item) => item.name !== name))
   }
 
-  // Debounced place autocomplete (OpenStreetMap Nominatim).
+  const searchNominatim = useCallback(
+    async (query: string, limit: number, signal?: AbortSignal): Promise<Place[]> => {
+      const response = await axios.get("https://nominatim.openstreetmap.org/search", {
+        params: { q: `${query}, Ahmedabad, Gujarat`, format: "json", limit, "accept-language": `${lang},en` },
+        signal,
+      })
+      return Array.isArray(response.data) ? response.data : []
+    },
+    [lang],
+  )
+
+  // Google suggestions, or null to use Nominatim.
+  const searchGoogle = useCallback(
+    async (query: string, signal: AbortSignal): Promise<Place[] | null> => {
+      if (!googleSearch.current || typeof crypto === "undefined" || !crypto.randomUUID) return null
+      placesSession.current ??= crypto.randomUUID()
+      try {
+        const { data } = await axios.get(`${API_URL}/api/places/autocomplete`, {
+          params: { q: query, session: placesSession.current, lang },
+          signal,
+        })
+        if (data?.source === "google" && Array.isArray(data.suggestions)) {
+          return data.suggestions.map((s: { id: string; name: string; address: string }) => ({
+            google_id: s.id,
+            name: s.name,
+            display_name: s.address,
+          }))
+        }
+        googleSearch.current = false // over a limit or the month's budget: Nominatim from now on
+      } catch (err) {
+        if (axios.isCancel(err)) throw err
+      }
+      return null
+    },
+    [lang],
+  )
+
+  // Debounced place autocomplete: Google Places, falling back to OpenStreetMap Nominatim.
   useEffect(() => {
     const query = searchQuery.trim()
     if (query.length < 3) {
@@ -317,11 +358,7 @@ const NearestStations = () => {
     const timer = setTimeout(async () => {
       setSuggestionsLoading(true)
       try {
-        const response = await axios.get("https://nominatim.openstreetmap.org/search", {
-          params: { q: `${query}, Ahmedabad, Gujarat`, format: "json", limit: 5, "accept-language": `${lang},en` },
-          signal: controller.signal,
-        })
-        setSuggestions(response.data)
+        setSuggestions((await searchGoogle(query, controller.signal)) ?? (await searchNominatim(query, 5, controller.signal)))
       } catch (err) {
         if (!axios.isCancel(err)) setSuggestions([])
       } finally {
@@ -333,7 +370,7 @@ const NearestStations = () => {
       clearTimeout(timer)
       controller.abort()
     }
-  }, [searchQuery, lang])
+  }, [searchQuery, searchGoogle, searchNominatim])
 
   const fetchStations = useCallback(
     async (latitude: number, longitude: number, locationAccuracy: number | null = null, name: string | null = null) => {
@@ -372,15 +409,43 @@ const NearestStations = () => {
     }
   }, [fetchStations])
 
-  const selectPlace = (place: Place) => {
-    const latitude = parseFloat(String(place.lat ?? place.latitude))
-    const longitude = parseFloat(String(place.lon ?? place.lng ?? place.longitude))
+  // A Google suggestion carries only its place ID; our server looks up where it is.
+  const locateGooglePlace = async (place: Place): Promise<{ lat: number; lon: number } | null> => {
+    const session = placesSession.current
+    placesSession.current = null // the session ends with this lookup
+    try {
+      const { data } = await axios.get(`${API_URL}/api/places/details`, { params: { id: place.google_id, session } })
+      if (typeof data?.latitude === "number" && typeof data?.longitude === "number")
+        return { lat: data.latitude, lon: data.longitude }
+      if (data?.source === "fallback") googleSearch.current = false
+    } catch {
+      // look the name up on Nominatim instead
+    }
+    const [match] = await searchNominatim(place.display_name || place.name || "", 1).catch(() => [])
+    return match ? { lat: parseFloat(String(match.lat)), lon: parseFloat(String(match.lon)) } : null
+  }
+
+  const selectPlace = async (place: Place) => {
     const name = place.display_name || place.name || ""
-    saveToHistory({ name, lat: latitude, lng: longitude })
-    fetchStations(latitude, longitude, null, name)
     setSearchQuery("")
     setSuggestions([])
     setShowDropdown(false)
+
+    let latitude = parseFloat(String(place.lat ?? place.latitude))
+    let longitude = parseFloat(String(place.lon ?? place.lng ?? place.longitude))
+    if (place.google_id) {
+      setLoading(true)
+      setError("")
+      const found = await locateGooglePlace(place)
+      if (!found || Number.isNaN(found.lat) || Number.isNaN(found.lon)) {
+        setLoading(false)
+        setError("error.unexpected")
+        return
+      }
+      ;({ lat: latitude, lon: longitude } = found)
+    }
+    saveToHistory({ name, lat: latitude, lng: longitude })
+    fetchStations(latitude, longitude, null, name)
   }
 
   const submitMapsLink = async (e: React.FormEvent) => {
@@ -477,7 +542,7 @@ const NearestStations = () => {
                   {suggestions.length > 0 && (
                     <ul className="py-2">
                       {suggestions.map((place) => (
-                        <li key={place.place_id}>
+                        <li key={place.google_id ?? place.place_id}>
                           <button
                             type="button"
                             onClick={() => selectPlace(place)}

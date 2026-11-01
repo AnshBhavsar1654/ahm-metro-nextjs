@@ -9,10 +9,28 @@ export function errorResponse(message: string, status: number = 400): NextRespon
   return NextResponse.json({ error: message }, { status })
 }
 
-/** Render and Vercel put the real client first in x-forwarded-for. */
+/** Hosting proxies (e.g. Vercel) put the real client first in x-forwarded-for. */
 export function clientIp(request: Request): string {
   const forwarded = request.headers.get("x-forwarded-for") ?? ""
   return forwarded.split(",")[0]!.trim() || request.headers.get("x-real-ip") || "unknown"
+}
+
+/**
+ * True for a request a browser sent from another site (Sec-Fetch-Site, or an Origin that isn't this host).
+ * Scripts can leave these headers out, so this only stops other sites using an endpoint from their pages;
+ * the rate limits handle the rest.
+ */
+export function crossSite(request: Request): boolean {
+  const site = request.headers.get("sec-fetch-site")
+  if (site && site !== "same-origin" && site !== "none") return true
+  const origin = request.headers.get("origin")
+  if (!origin) return false
+  const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host") ?? new URL(request.url).host
+  try {
+    return new URL(origin).host !== host.split(",")[0]!.trim()
+  } catch {
+    return true
+  }
 }
 
 export const SSE_HEADERS = {
