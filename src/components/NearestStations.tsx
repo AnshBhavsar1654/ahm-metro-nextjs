@@ -45,6 +45,7 @@ type Place = {
 type SavedPlace = { name: string; lat: number; lng: number }
 
 const HISTORY_KEY = "metro_recent_searches"
+const SEARCH_DELAY_MS = 700
 
 const FAMOUS_LANDMARKS = [
   { name: "Sabarmati Ashram", lat: 23.0605, lng: 72.5801 },
@@ -346,7 +347,8 @@ const NearestStations = () => {
     [lang],
   )
 
-  // Debounced place autocomplete: Google Places, falling back to OpenStreetMap Nominatim.
+  // Place autocomplete: Google Places, falling back to OpenStreetMap Nominatim. Searches once typing
+  // pauses for SEARCH_DELAY_MS, so half-typed words don't each cost a Google request.
   useEffect(() => {
     const query = searchQuery.trim()
     if (query.length < 3) {
@@ -364,7 +366,7 @@ const NearestStations = () => {
       } finally {
         if (!controller.signal.aborted) setSuggestionsLoading(false)
       }
-    }, 500)
+    }, SEARCH_DELAY_MS)
 
     return () => {
       clearTimeout(timer)
