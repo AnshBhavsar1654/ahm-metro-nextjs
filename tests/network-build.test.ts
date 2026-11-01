@@ -1,6 +1,6 @@
 // @vitest-environment node
 /**
- * The network build (port of build_network.py) reproduces the committed src/data/network.json from its
+ * The network build reproduces the committed src/data/network.json from its
  * inputs — every station, line, fare, running time and traced track point — and reports the same fixes.
  */
 import { readFileSync } from "node:fs"

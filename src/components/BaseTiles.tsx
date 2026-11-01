@@ -3,7 +3,7 @@
 import { TileLayer } from "react-leaflet"
 import { useTheme } from "@/lib/theme"
 
-// Quiet grey basemap so the coloured line and markers are the only saturated things on the map (design.md §6).
+// Quiet grey basemap so the coloured line and markers are the only saturated things on the map.
 // Esri's Gray Canvas needs no API key. Native tiles stop at zoom 16.
 const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas"
 

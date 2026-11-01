@@ -1,6 +1,6 @@
 // @vitest-environment node
 /**
- * The HTTP layer — the ports of backend/tests' TestClient checks: the metro endpoints, chat streaming
+ * The HTTP layer: the metro endpoints, chat streaming
  * and its limits, visits (counter, limit per IP, live stream) and the shared store.
  */
 import { mkdtempSync } from "node:fs"

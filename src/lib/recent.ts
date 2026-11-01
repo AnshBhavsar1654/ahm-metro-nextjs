@@ -1,4 +1,4 @@
-// Recent journeys, kept in this browser only (like the "favourites" on TMB and Tokyo Metro's apps).
+// Recent journeys, kept in this browser only.
 const KEY = "metro_recent_journeys"
 const MAX = 5
 

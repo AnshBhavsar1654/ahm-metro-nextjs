@@ -1,7 +1,6 @@
 /**
- * Builds network.json from the GMRC sheets, the timetable and the OpenStreetMap track — the 1:1
- * TypeScript port of backend/scripts/build_network.py. Run through scripts/build-network.ts after
- * editing either sheet.
+ * Builds network.json from the GMRC sheets, the timetable and the OpenStreetMap track. Run it through
+ * scripts/build-network.ts after editing either sheet.
  *
  * Inputs (data/ and src/data/)
  * - Location.xlsx: Station, Latitude, Longitude, Line, Status. Rows of one Line are that corridor's
@@ -16,8 +15,9 @@
  *   the track data does not cover falls back to a straight line, and the build says so.
  *
  * The build refuses to produce a network if the data is broken (unknown station, unreachable station,
- * missing fare), and reports every correction it had to make. Every float goes through the Python
- * helpers in ./rounding so the output matches the Python build value for value (tests/network-build).
+ * missing fare), and reports every correction it had to make. Floats are rounded with the
+ * Python-compatible helpers in ./rounding, so the output matches the committed network.json value for
+ * value (tests/network-build.test.ts).
  */
 import { LINE_SPECS, STATUSES, num, text } from "./excel-parse"
 import { pyRound, pySum } from "./rounding"
@@ -66,7 +66,7 @@ export function kmBetween(a: Point, b: Point): number {
 
 const metres = (a: Point, b: Point): number => kmBetween(a, b) * 1000
 
-/** Python's float floor division (CPython float_floor_div). */
+/** Floor division on floats, computed exactly as Python's `//` does (needed for identical output). */
 function floorDiv(a: number, b: number): number {
   let mod = a % b
   let div = (a - mod) / b
@@ -79,7 +79,7 @@ function floorDiv(a: number, b: number): number {
   return floor
 }
 
-/** statistics.median */
+/** Median of a list of numbers (the mean of the middle two for an even count). */
 function median(values: number[]): number {
   const sorted = [...values].sort((a, b) => a - b)
   const n = sorted.length
@@ -88,7 +88,7 @@ function median(values: number[]): number {
 
 const pairs = <T>(items: T[]): [T, T][] => items.slice(1).map((item, i) => [items[i]!, item])
 
-/** heapq on (cost, key) tuples: ties go to the smaller key. */
+/** Min-heap of (cost, key) pairs; equal costs pop the smaller key first. */
 class Heap<K extends number | string> {
   private items: [number, K][] = []
 
@@ -153,7 +153,7 @@ function loadStationsAndLines(rows: Row[]) {
     const known = stations.get(row.station)
     if (known && (known[0] !== coord[0] || known[1] !== coord[1])) fail(`${row.station} has two different coordinates`)
     stations.set(row.station, coord)
-    // pandas: a text cell is the status, an empty (NaN) or numeric cell counts as Operational
+    // A text cell is the status; an empty or numeric cell counts as Operational.
     const label = row.status == null || typeof row.status === "number" ? "Operational" : text(row.status)
     if (!(label in STATUSES))
       fail(`${row.station}: unknown Status '${label}' (use one of ${Object.keys(STATUSES).sort().join(", ")})`)
@@ -472,7 +472,7 @@ function loadFares(rows: Row[], stations: Map<string, Point>, status: Map<string
 
 // ---------------------------------------------------------------- the build
 
-/** The network, as build_network.py wrote it. Throws BuildError on broken data. */
+/** Builds the complete network (the contents of network.json). Throws BuildError on broken data. */
 export function buildNetwork(inputs: BuildInputs): Network {
   const { stations, status, lines } = loadStationsAndLines(inputs.locationRows)
   const minutes = segmentMinutes(lines, stations, inputs.timetable)

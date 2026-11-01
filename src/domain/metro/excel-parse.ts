@@ -1,14 +1,13 @@
 /**
- * Excel parsing for the metro data pipeline — the TypeScript port of build_network.py's
- * pandas layer (Phase 1 spike → shared by scripts + tests; the full build lands in Phase 4).
+ * Excel parsing for the metro data pipeline, shared by the network build, scripts and tests.
  *
- * Contract captured during the Phase 1 data spike (all verified against the committed network.json):
- * - pandas reads the first sheet with row 1 as trimmed headers; `df["col"].str.strip()` trims every cell.
- * - Cell values may arrive from exceljs as rich-text objects, formula results or numbers; text() mirrors
- *   what pandas would have shown as a string.
- * - Fare rows are matched pair-wise: a fare counts when EITHER direction matches (build_network.py's
- *   load_fares fills the reverse direction from whichever row exists). Station status only excuses the
- *   *absence* of a fare — it never drops a fare row that the sheet does carry.
+ * Parsing rules (verified against the committed network.json):
+ * - The first sheet is read with row 1 as headers; headers and every text cell are trimmed.
+ * - exceljs may return a cell as rich text, a formula result or a number; text() turns each into a plain
+ *   trimmed string.
+ * - Fares are matched per station pair: a fare counts when EITHER direction has a row, and the missing
+ *   direction is filled from it. Station status only excuses a *missing* fare; it never drops a fare row
+ *   the sheet contains.
  */
 import type ExcelJS from "exceljs"
 
@@ -42,7 +41,7 @@ export const round = (n: number, digits: number): number => {
   return Math.round(n * factor) / factor
 }
 
-/** exceljs stringifies cells differently from pandas; both must end at the same trimmed string. */
+/** A cell as a trimmed string, whatever form exceljs returns it in (text, rich text, formula, number). */
 export function text(value: unknown): string {
   if (value == null) return ""
   if (typeof value === "string") return value.trim()
@@ -61,12 +60,12 @@ export function text(value: unknown): string {
   return String(value).trim()
 }
 
-/** float(row.Latitude) — the coercion every numeric column gets. */
+/** A cell as a number (used for every numeric column). */
 export function num(value: unknown): number {
   return Number(text(value))
 }
 
-/** Reads one worksheet template into rows keyed by trimmed header text (df.read_excel's shape). */
+/** Reads a worksheet into rows keyed by trimmed header text. */
 export function readSheet(sheet: ExcelJS.Worksheet): Record<string, unknown>[] {
   const rows: Record<string, unknown>[] = []
   let headers: string[] | null = null
@@ -116,7 +115,7 @@ export function lineStations(spec: { corridor: string; order: string }, parsed: 
 }
 
 /**
- * build_network.py: a line is "work in progress" when every station that belongs only to it
+ * A line is "work in progress" when every station that belongs only to it
  * (interchanges aside) is still work in progress; otherwise the line is operational.
  */
 export function derivedLineStatus(spec: { corridor: string }, parsed: ParsedLocation): string {

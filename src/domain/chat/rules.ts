@@ -1,6 +1,6 @@
 /**
  * Instant chatbot answers with no model call: understanding the rider's message and replying from
- * the app's data — the 1:1 TypeScript port of backend/chatbot/rules.py.
+ * the app's data.
  *
  * Works for English, Gujarati and Hindi, including Gujarati/Hindi typed in Latin letters. A few
  * milliseconds. Sections: station names in local scripts (./rules-data.json), message understanding
@@ -183,10 +183,13 @@ for (const name of getAllStations()) {
   }
   for (const local of NAMES_LOCAL[name] ?? []) localIndex.push([normalise(local), name])
 }
-localIndex.sort((a, b) => b[0].length - a[0].length) // stable, like Python's sort
+localIndex.sort((a, b) => b[0].length - a[0].length) // stable sort: aliases of equal length keep their order
 const latinKeys = [...latinIndex.keys()]
 
-/** Python's str.find over code points would differ from UTF-16 indexes only for astral characters: none here. */
+/**
+ * True for a decimal digit in any script. Positions in this file are UTF-16 indexes; they equal code-point
+ * positions because no station name uses characters outside the Basic Multilingual Plane.
+ */
 const isDigit = (ch: string | undefined): boolean => ch !== undefined && /\p{Nd}/u.test(ch)
 
 /** Canonical station names mentioned in `text`, in the order they appear (no duplicates). */
@@ -345,7 +348,7 @@ export function lineLabel(line: string, lang: Lang): string {
 
 const km = (distance: number): string => pyFixed(distance, 1).replace(/0+$/, "").replace(/\.$/, "")
 
-/** str.format(a=..., b=...) */
+/** Fills {name} placeholders in a reply template; unknown placeholders are left as they are. */
 export const format = (template: string, values: Record<string, string>): string =>
   template.replace(/\{(\w+)\}/g, (match, key: string) => values[key] ?? match)
 

@@ -2,9 +2,9 @@
  * Python-compatible rounding (exact, via BigInt).
  *
  * Python's round() is round-half-to-even on the binary float ("bankers rounding"), while JS
- * Math.round is round-half-up. Golden parity with the FastAPI backend needs the same doubles in
- * every payload (route distances, journey minutes, walk times), so every rounding the backend
- * did with round() goes through this helper.
+ * Math.round is round-half-up. API responses (route distances, journey minutes, walk times) must
+ * match the golden fixtures captured from the original Python implementation exactly, so every
+ * rounding goes through this helper.
  *
  * Exactness: the IEEE 754 double is decomposed into mantissa * 2^exponent; value * 10^digits is
  * formed as an exact rational (numerator/denominator in BigInts), the nearest multiple is chosen
@@ -59,16 +59,15 @@ export function pyRound(value: number, digits: number = 0): number {
   return Number(roundedUnit) / 10 ** digits
 }
 
-/** int(round(x)) — backend.py often does int(round(...)) on hours/minutes (always >= 0 there). */
+/** Rounds to a whole number like Python's int(round(x)); used for hours and minutes (always >= 0). */
 export function pyRoundInt(value: number): number {
   return Math.trunc(pyRound(value))
 }
 
 /**
- * Neumaier compensated summation — what Python 3.12+'s builtin sum() uses for floats (CPython
- * switched from naive left-to-right addition). Golden parity needs the same compensated
- * accumulation wherever backend code wrote sum() over a numeric generator, e.g. journey ride
- * minutes; the bare += loops (describe()'s running km) stay naive on both sides.
+ * Neumaier compensated summation, which Python 3.12+'s built-in sum() uses for floats. Used where the
+ * original Python code called sum() (e.g. journey ride minutes), so results match the golden fixtures to
+ * the last bit; plain `+=` loops (such as the running km in describe()) stay plain.
  */
 export function pySum(values: number[]): number {
   let sum = 0

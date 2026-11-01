@@ -1,10 +1,9 @@
 /**
- * Site visit counter with live updates for the footer — the port of backend/metro/visits.py, on top of
- * the shared store (./store).
+ * Site visit counter with live updates for the footer, built on the shared store (./store).
  *
  * - With Upstash Redis, the total, the per-IP limit and who is online are shared by every server
  *   instance and survive deploys. Without it, they live in this process and the total is saved to a
- *   small JSON file after each visit (VISITS_FILE), as the FastAPI backend did.
+ *   small JSON file after each visit (VISITS_FILE).
  * - The browser decides what a visit is (once per browser per day) and reports it with POST /api/visits.
  *   The server also ignores more than a few visits per IP per hour, so a script can't inflate the number.
  * - Every open footer holds a server-sent-events stream; it gets the new numbers whenever the total or

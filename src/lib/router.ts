@@ -6,7 +6,7 @@ import { usePathname, useRouter, useSearchParams as useNextSearchParams } from "
 type ParamsInit = URLSearchParams | Record<string, string>
 
 /**
- * react-router's useSearchParams on top of Next's router: [params, setParams(next, { replace })].
+ * The URL query as state on top of Next's router: [params, setParams(next, { replace })].
  * Changing the query never scrolls the page.
  */
 export function useSearchParams(): [URLSearchParams, (next: ParamsInit, options?: { replace?: boolean }) => void] {

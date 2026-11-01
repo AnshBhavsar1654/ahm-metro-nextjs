@@ -1,7 +1,6 @@
 /**
  * Rebuilds src/data/network.json (the only network file the app reads) from the GMRC sheets in data/,
- * the timetable and the OpenStreetMap track — the port of backend/scripts/build_network.py. Run after
- * editing either sheet or refreshing the track:
+ * the timetable and the OpenStreetMap track. Run after editing either sheet or refreshing the track:
  *
  *     bun run data:network
  *
@@ -13,8 +12,8 @@ import * as prettier from "prettier"
 import { BuildError, buildNetwork, type Network } from "../src/domain/metro/build-network"
 import { RUNTIME_DIR, loadBuildInputs } from "../src/domain/metro/build-inputs"
 
-// Coordinates, distances and running times are floats in the Python build ("3.0", not "3"), so the
-// file stays byte-for-byte what build_network.py wrote and a rebuild only diffs where data changed.
+// Coordinates, distances and running times are always written with a decimal point ("3.0", not "3"),
+// matching the committed file, so a rebuild only shows a diff where the data actually changed.
 const FLOAT_KEYS = new Set(["lat", "lon", "km", "minutes"])
 const FLOAT = "\u0001float:"
 

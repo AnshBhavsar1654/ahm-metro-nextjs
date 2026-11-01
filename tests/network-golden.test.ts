@@ -1,6 +1,6 @@
 /**
- * Golden parity: the TypeScript domain against the real outputs of the frozen FastAPI backend
- * (captured by scripts/capture-golden.py from the actual Python code).
+ * Golden tests: routes, fares, stations and departures must match the outputs of the original Python
+ * backend (captured by scripts/capture-golden.py).
  */
 import { readFileSync } from "node:fs"
 import path from "node:path"

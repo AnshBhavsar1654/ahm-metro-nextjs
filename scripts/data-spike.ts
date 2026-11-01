@@ -1,9 +1,9 @@
 /**
- * Phase 1 data spike (human runner): reads the GMRC workbooks through the shared exceljs
- * parse layer and reports any drift against the committed network.json.
+ * Manual check: reads the GMRC workbooks with the shared Excel parser (src/domain/metro/excel-parse.ts)
+ * and reports anything that differs from the committed network.json.
  *
- * The permanent check is tests/metro-data-golden.test.ts (runs on every `bun run test`);
- * this script exists for one-off runs outside vitest.
+ * The same check runs automatically in tests/metro-data-golden.test.ts; this script is for a quick
+ * one-off run outside Vitest.
  *
  *     bun run scripts/data-spike.ts
  */

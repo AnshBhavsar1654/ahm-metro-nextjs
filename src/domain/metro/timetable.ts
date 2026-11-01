@@ -1,10 +1,10 @@
 /**
  * Travel times and next trains, from GMRC's published timetable (src/data/timetable.json,
- * w.e.f. 18 May 2026) — the 1:1 TypeScript port of backend/metro/timetable.py.
+ * effective 18 May 2026).
  *
  * The timetable lists only the through trains between APMC and Mahatma Mandir / GIFT City, at
  * nine timing points. From it we take:
- * - running times per segment (computed by build_network.py and stored in network.json);
+ * - running times per segment (computed by the network build and stored in network.json);
  * - departures for every station on that corridor: exact at timing points, interpolated
  *   ("approx") elsewhere.
  * The Blue Line is not in the timetable; its running time is an approximation (about 45 min
@@ -26,7 +26,7 @@ export type StationTime = { hour: number; minute: number }
 
 export type JourneyLeg = { line: string; from: string; to: string; stops?: number }
 
-/** The current time in Ahmedabad, as { hour, minute } — the runtime twin of datetime.now(IST). */
+/** The current time in Ahmedabad, as { hour, minute }. */
 export function istNow(date: Date = new Date()): StationTime {
   const parts = new Intl.DateTimeFormat("en-GB", {
     timeZone: "Asia/Kolkata",
@@ -69,7 +69,7 @@ const clock = (minutes: number): string => {
 
 /**
  * Minutes from each line's first station, from the segment running times in network.json
- * (build_network.py derives them from this same timetable; the Blue Line is an approximation).
+ * (the network build derives them from this same timetable; the Blue Line is an approximation).
  */
 export const LINE_MINUTES: Map<string, Map<string, number>> = new Map()
 for (const line of NETWORK.lines) {
@@ -178,7 +178,7 @@ function throughTrain(a: string, b: string): boolean {
 
 /** Estimated time on the train, plus TRANSFER_MINUTES for each change that needs a different train. */
 export function journeyMinutes(legs: JourneyLeg[]): number {
-  // Python: ride = sum(abs(...) for leg in legs) — builtins use compensated summation for floats.
+  // Compensated summation (pySum) keeps the total identical to the golden fixtures.
   const ride = pySum(
     legs.map((leg) => {
       const lineMinutes = LINE_MINUTES.get(leg.line)!
@@ -250,10 +250,10 @@ export function journeyTrains(legs: JourneyLeg[], now: StationTime = istNow(), l
   }
 }
 
-/** (minute, destination, approx) — the same tuple order backend's sort() compared. */
+/** Orders calls by minute, then destination, then exact times before approximate ones. */
 const compareCalls = (a: [number, string, boolean], b: [number, string, boolean]): number => {
   if (a[0] !== b[0]) return a[0] - b[0]
-  if (a[1] !== b[1]) return a[1] < b[1] ? -1 : 1 // code-point order, like Python strings
+  if (a[1] !== b[1]) return a[1] < b[1] ? -1 : 1 // code-point order, not locale order
   return Number(a[2]) - Number(b[2]) // false < true
 }
 

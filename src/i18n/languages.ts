@@ -11,7 +11,7 @@ export const LANGUAGE_KEY = "metro_language"
 
 export const isLanguage = (code: unknown): code is Language => LANGUAGES.some((l) => l.code === code)
 
-/** The saved choice, else a Hindi or Gujarati browser gets that language (as navigator.language did). */
+/** The saved choice if any; otherwise Hindi or Gujarati for a browser set to that language, else English. */
 export function pickLanguage(saved: string | undefined, acceptLanguage: string | null): Language {
   if (isLanguage(saved)) return saved
   const browser = (acceptLanguage ?? "").split(",")[0]!.trim().toLowerCase()

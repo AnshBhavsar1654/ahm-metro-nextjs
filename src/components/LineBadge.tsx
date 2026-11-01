@@ -3,7 +3,7 @@
 import { lineById } from "@/lib/network"
 import { useI18n } from "@/i18n"
 
-// Line pictogram, as on the Paris and Barcelona maps: a square in the line's official colour with its initial.
+// Line badge: a square in the line's official colour with the line's initial.
 // Colour is never the only cue: the initial is always there, and `showName` adds the full name.
 const TEXT_ON: Record<string, string> = { yellow: "#12151B", lightblue: "#12151B" }
 

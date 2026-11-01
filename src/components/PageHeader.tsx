@@ -1,6 +1,6 @@
 "use client"
 
-// Page title shared by every sub-page (design.md §4): plain text on the page background, with clear space
+// Page title shared by every sub-page: plain text on the page background, with clear space
 // below the navbar.
 const PageHeader = ({ title, subtitle, children }: { title: string; subtitle?: string; children?: React.ReactNode }) => (
   <header className="mx-auto max-w-7xl px-5 pt-8">

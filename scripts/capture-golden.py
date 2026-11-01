@@ -13,8 +13,8 @@ import os
 import sys
 from datetime import datetime, timedelta, timezone
 
-# The FastAPI backend these fixtures were captured from (deleted from this repo at cutover): point
-# BACKEND_DIR at the original Ahmedabad Metro repository's backend/ folder to recapture.
+# The fixtures were captured from the original Python (FastAPI) backend, which is not part of this repo.
+# To recapture them, point BACKEND_DIR at that repository's backend/ folder.
 BACKEND_DIR = os.environ.get("BACKEND_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "Ahmedabad Metro", "backend"))
 sys.path.insert(0, BACKEND_DIR)
 

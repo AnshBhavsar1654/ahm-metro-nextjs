@@ -1,6 +1,6 @@
 /**
  * The LLM layer: a LangGraph tool-calling agent (LangChain `createAgent`) on Gemini, streamed, with
- * racing models — the TypeScript port of backend/chatbot/agent.py.
+ * racing models.
  *
  * - Each Gemini model gets its own agent graph: model node -> tools node -> model node ... until it
  *   answers. The tools are in ./tools (fares, routes, timetables, station gates, knowledge-base search).
@@ -26,7 +26,7 @@ export const DEFAULT_MODELS: [model: string, thinking: string][] = [
   ["gemini-2.5-flash-lite", "0"],
   ["gemini-3.5-flash-lite", "minimal"],
 ]
-/** In seconds. Mutable so tests can shorten them (backend tests monkeypatched the module constants). */
+/** Time limits in seconds. Mutable so tests can shorten them. */
 export const timing = {
   HEDGE_SECONDS: 4, // no answer yet: start the next model alongside
   FIRST_CHUNK_SECONDS: 15, // per model: connect + think + tool calls until the first word
@@ -78,7 +78,7 @@ export function configuredModels(): [string, string][] {
 type ChatModelFactory = (apiKey: string, model: string, level: string) => BaseChatModel
 
 function geminiModel(apiKey: string, model: string, level: string): BaseChatModel {
-  // maxRetries 0: no retries, other models race instead (Python's max_retries=1 meant the same).
+  // maxRetries 0: a failed call isn't retried; the other models in the race take over instead.
   const common = { model, apiKey, maxOutputTokens: Math.trunc(envFloat("GEMINI_MAX_OUTPUT_TOKENS", 1024)), maxRetries: 0 }
   if (/^\d+$/.test(level)) {
     // Gemini 2.x: a thinking budget, and a low temperature for factual answers
@@ -263,7 +263,7 @@ async function modelsToTry(): Promise<[string, string][]> {
 
 type RaceEvent = [model: string, piece: string | null, error: unknown]
 
-/** asyncio.Queue's put_nowait/get, with get() bounded by a timeout. */
+/** A minimal async queue: put() never blocks; get() waits for the next event, up to a timeout. */
 class EventQueue {
   private items: RaceEvent[] = []
   private waiter: ((event: RaceEvent) => void) | null = null
@@ -354,7 +354,7 @@ export async function* streamReply(apiKey: string, system: string, messages: Mes
         continue
       }
 
-      running.get(model)?.controller.abort() // done or failed: release its stream (Python: aclose)
+      running.get(model)?.controller.abort() // done or failed: release its stream
       running.delete(model)
       const took = (monotonic() - started.get(model)!).toFixed(1)
       if (exc === null && winner === model) {

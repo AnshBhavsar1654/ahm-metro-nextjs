@@ -1,6 +1,6 @@
 import { LINES, type Line, type LineId } from "@/lib/lines"
 
-// Stations of each line in running order (same order as backend/route.py).
+// Stations of each line in running order. Must match src/data/network.json (tests/frontend-network.test.ts).
 export const LINE_STATIONS: Record<LineId, string[]> = {
   red: [
     "APMC",
@@ -67,7 +67,7 @@ export const LINE_STATIONS: Record<LineId, string[]> = {
   lightblue: ["Gift City", "GIFT City House", "Gujarat Biotechnology University", "Shahpur (Gandhinagar)"],
 }
 
-// Stations that aren't open (same as the Status column in backend/data/Location.xlsx). Everything else is operational.
+// Stations that aren't open (must match the Status column in data/Location.xlsx). Everything else is operational.
 // "wip": not open yet (Sabarmati, and the two lines being built). Routes are shown, but no trains stop and there
 // are no fares yet. "construction" (can't be a journey's start or end) is supported but no station uses it now.
 export type StationStatus = "operational" | "wip" | "construction"
@@ -94,7 +94,7 @@ export const isInterchange = (station: string): boolean => (STATION_LINES[statio
 
 // ---------------------------------------------------------------- schematic layout
 //
-// A diagram, not a map: lines run straight with even spacing, like the Tokyo and Paris diagrams.
+// A diagram, not a map: lines run straight with even spacing between stations.
 // Blue runs west-east; Red runs south-north and crosses Blue at Old High Court; Yellow climbs north-east
 // from Koteshwar Road to GNLU, then north to Sachivalaya and west to Mahatma Mandir; Violet runs east to GIFT City.
 // The lines being built: Pink drops south-east from Koteshwar Road to the Airport; Light Blue climbs north-east

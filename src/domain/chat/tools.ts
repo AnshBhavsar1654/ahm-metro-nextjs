@@ -1,6 +1,6 @@
 /**
  * Tools the agent can call, so fares, routes, timetables, station details and policies come from the
- * app's data — the 1:1 TypeScript port of backend/chatbot/tools.py.
+ * app's data.
  *
  * Every tool returns an object and never throws: problems go back to the model as { error } so it can
  * tell the rider. The plain functions are exported too: the assistant puts their results in the
@@ -127,7 +127,7 @@ export const searchKnowledgeBase = safe("search_knowledge_base", (query: string)
   return { sections: found.map(sectionText) }
 })
 
-// ---------------------------------------------------------------- LangChain tools (descriptions as in tools.py docstrings)
+// ---------------------------------------------------------------- LangChain tools (the model picks a tool by its description)
 
 const station = (what: string) => z.string().describe(`${what}, as the rider wrote it (any language).`)
 

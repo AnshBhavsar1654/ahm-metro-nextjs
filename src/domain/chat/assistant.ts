@@ -1,6 +1,5 @@
 /**
- * Metro assistant: rules first, a RAG agent second, a knowledge-base answer if every model is down —
- * the TypeScript port of backend/chatbot/assistant.py.
+ * Metro assistant: rules first, a RAG agent second, a knowledge-base answer if every model is down.
  *
  * 1. Rules (./rules): fares and routes between two stations, greetings and "nearest station" are
  *    answered straight from the app's own data, in English, Gujarati or Hindi. Instant and never fails.
@@ -29,7 +28,7 @@ export type ChatEvent = { type: "delta"; text: string } | { type: "done"; source
 const HISTORY_TURNS = 6
 const LANGUAGE_NAMES: Record<Lang, string> = { en: "English", gu: "Gujarati (Gujarati script)", hi: "Hindi (Devanagari script)" }
 
-/** asyncio.Semaphore: caps concurrent questions at the model, so a burst of riders queues briefly instead of exhausting the quota at once. */
+/** Caps how many questions reach the models at once, so a burst of riders queues briefly instead of exhausting the quota. */
 class Semaphore {
   private queue: (() => void)[] = []
 
@@ -197,7 +196,7 @@ const MONTHS = [
   "December",
 ]
 
-/** datetime.now(IST).strftime("%A %d %B %Y, %I:%M %p") */
+/** The date and time in Ahmedabad for the model's notes, e.g. "Wednesday 01 July 2026, 10:30 AM". */
 export function istStamp(date: Date): string {
   const ist = new Date(date.getTime() + 330 * 60_000) // read the UTC fields of the shifted time
   const pad = (n: number) => String(n).padStart(2, "0")
@@ -260,7 +259,7 @@ const TIME_SENSITIVE = pyRegex(
 
 // ---------------------------------------------------------------- entry point
 
-/** Seam for tests (Python monkeypatched the module attribute). */
+/** Indirection so tests can replace the rules layer. */
 export const layers = { answerWithRules }
 
 /**

@@ -1,5 +1,5 @@
 /**
- * Downloads the metro track geometry into data/tracks.json — the port of backend/scripts/fetch_tracks.py.
+ * Downloads the metro track geometry into data/tracks.json.
  * Run when the network changes (new line or extension), then rebuild:
  *
  *     bun run data:tracks

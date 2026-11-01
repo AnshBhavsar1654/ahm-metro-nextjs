@@ -138,7 +138,7 @@ const RoutesInfo = () => {
       })
       .catch((err) => console.error("Failed to load station coordinates:", err))
 
-    // Without track geometry the lines are drawn station to station, as before.
+    // If the track geometry can't be loaded, lines are drawn as straight segments between stations.
     getJson("/api/lines")
       .then((data) => setLineTracks(Array.isArray(data) ? data : []))
       .catch(() => setLineTracks([]))

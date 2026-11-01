@@ -1,5 +1,5 @@
 /**
- * Phase 1 golden test: the exceljs parse layer reproduces the committed network.json.
+ * Golden test: the Excel parser reproduces the stations, lines and fares in the committed network.json.
  *
  * The GMRC workbooks live in data/; the full build (src/domain/metro/build-network.ts) is pinned to
  * the committed network.json by tests/network-build.test.ts.

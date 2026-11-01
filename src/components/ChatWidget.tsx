@@ -140,7 +140,7 @@ function ChatWidget() {
 
   useEffect(() => () => abortRef.current?.abort(), [])
 
-  // Wake the backend as soon as the page loads, so a sleeping free-tier server is up before the first question.
+  // Wake the server as soon as the page loads, so a server asleep on free hosting is ready for the first question.
   useEffect(() => {
     fetch(`${API_URL}/health`).catch(() => {})
   }, [])

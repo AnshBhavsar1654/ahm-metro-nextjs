@@ -1,6 +1,5 @@
 /**
- * Routes and fares over the metro network described in src/data/network.json — the 1:1
- * TypeScript port of backend/metro/network.py.
+ * Routes and fares over the metro network described in src/data/network.json.
  *
  * Routing works on (station, line) states, so changing line has a cost of its own:
  * - riding one segment costs its running time (minutes, from the timetable);
@@ -12,8 +11,9 @@
  * route. Station status: "operational", "under construction" (trains pass through, nobody boards)
  * or "work in progress" (fares and trains not published yet).
  *
- * Every float that reaches a payload is rounded the Python way (./rounding): the golden tests pin
- * these outputs to the FastAPI implementation field for field, over all station pairs.
+ * Every float in an API response is rounded with the Python-compatible helpers in ./rounding: the golden
+ * tests compare these outputs field for field, for every station pair, with fixtures captured from the
+ * original Python implementation.
  */
 import networkData from "@/data/network.json"
 import { pyRound } from "./rounding"
@@ -79,8 +79,8 @@ const zip = <T>(items: T[]): [T, T][] => {
 const samePathPrefix = (path: State[], root: State[], length: number): boolean =>
   path.length >= length && root.every((state, i) => sameState(state, path[i]!))
 
-/** A binary min-heap ordered by (cost, tie) — the exact pop order backend's heapq gives, because
- * backend/metro/network.py breaks cost ties with an incrementing counter before the state. */
+/** A binary min-heap ordered by (cost, tie). Equal costs pop in insertion order (`tie` is an increasing
+ * counter), which keeps route choices identical to the golden fixtures. */
 class MinHeap<T> {
   private items: { cost: number; tie: number; value: T }[] = []
 
@@ -167,7 +167,7 @@ export class Network {
         [fromCoord[0], fromCoord[1]],
         [toCoord[0], toCoord[1]],
       ]
-      // Python: seg.get("geometry") or fallback — an empty list falls back too.
+      // A missing or empty geometry falls back to the straight line.
       this.geometry.set(segKey(seg.line, seg.from, seg.to), seg.geometry?.length ? seg.geometry : fallback)
       const a: State = [seg.from, seg.line]
       const b: State = [seg.to, seg.line]
@@ -389,7 +389,7 @@ export class Network {
     return this.lookup.get((name ?? "").trim().toLowerCase()) ?? null
   }
 
-  /** None when either station isn't open: no fare is published for it yet. */
+  /** null when either station isn't open: no fare is published for it yet. */
   fare(source: string, destination: string): number | null {
     if (this.status.get(source) !== OPERATIONAL) return null
     if (this.status.get(destination) !== OPERATIONAL) return null

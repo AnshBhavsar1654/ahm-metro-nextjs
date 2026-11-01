@@ -10,8 +10,8 @@ import { useI18n } from "@/i18n"
 const lineByName: Record<string, Line> = Object.fromEntries(LINES.map((l) => [l.name, l]))
 
 /**
- * The journey as legs, one per line, the way Delhi and Tokyo show a route result:
- * board here, ride N stops, then either change trains or stay on a through train.
+ * The journey as legs, one per line: board here, ride N stops, then either change trains or stay on a
+ * through train.
  */
 export const JourneyLegs = ({ legs }: { legs: Leg[] }) => {
   const { theme } = useTheme()

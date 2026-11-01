@@ -23,7 +23,7 @@ const zoomButton =
   "flex h-9 w-9 items-center justify-center text-ink-900 transition hover:bg-line-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent disabled:opacity-40"
 
 /**
- * Schematic network diagram (in the spirit of the Tokyo and Paris metro diagrams).
+ * Schematic network diagram (a simplified layout, not a geographic map).
  * Click or press Enter on a station to select it. `highlight` dims every line but one;
  * `route` (a list of stations) dims everything off the route.
  */

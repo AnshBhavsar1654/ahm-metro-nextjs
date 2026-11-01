@@ -1,4 +1,4 @@
-// Station and line names in Gujarati and Hindi. Same spellings as the chatbot (backend/chatbot/rules.py).
+// Station and line names in Gujarati and Hindi. Same spellings as the chatbot (src/domain/chat/rules-data.json).
 // Keys are the network's English names.
 export const STATION_NAMES = {
   AEC: {

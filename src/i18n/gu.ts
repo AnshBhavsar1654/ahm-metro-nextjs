@@ -1,4 +1,4 @@
-// ગુજરાતી. Keys as in en.js; anything missing here shows in English.
+// ગુજરાતી. Keys as in en.ts; anything missing here shows in English.
 const gu = {
   "app.name": "અમદાવાદ મેટ્રો",
   "nav.main": "મુખ્ય",

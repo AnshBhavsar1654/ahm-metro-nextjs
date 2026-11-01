@@ -1,6 +1,6 @@
 // @vitest-environment node
 /**
- * The agent layer and the assistant's failure handling — the port of backend/tests/test_chatbot.py.
+ * The agent layer and the assistant's failure handling.
  * No network: the real LangGraph agent runs on a scripted chat model in place of Gemini.
  */
 import { afterEach, beforeEach, describe, expect, it } from "vitest"

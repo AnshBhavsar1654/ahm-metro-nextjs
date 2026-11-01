@@ -1,4 +1,4 @@
-// हिन्दी. Keys as in en.js; anything missing here shows in English.
+// हिन्दी. Keys as in en.ts; anything missing here shows in English.
 const hi = {
   "app.name": "अहमदाबाद मेट्रो",
   "nav.main": "मुख्य",

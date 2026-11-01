@@ -4,7 +4,7 @@ import { counter } from "@/server/visits"
 
 export const dynamic = "force-dynamic"
 
-/** GET /api/visits: { total, online } */
+/** GET /api/visits: the visit total and how many people have the site open, as { total, online }. */
 export async function GET() {
   return NextResponse.json(await counter().snapshot())
 }

@@ -1,6 +1,5 @@
 /**
- * Retrieval over the knowledge base (src/data/metro_kb.txt): the "R" in the assistant's RAG — the 1:1
- * TypeScript port of backend/chatbot/knowledge.py.
+ * Retrieval over the knowledge base (src/data/metro_kb.txt): the "R" in the assistant's RAG.
  *
  * The file is split into its "=== Heading ===" sections and indexed with BM25, plus a bonus for words in
  * a section's heading (a section is most about what its heading says). Search is lexical and in English:
@@ -84,7 +83,7 @@ const countTerms = (words: string[]): Map<string, number> => {
   return counts
 }
 
-// Read once per process. Python opened the file in text mode, so CRLF line ends become LF.
+// Read once per process. CRLF line endings become LF, so a Windows checkout gives the same sections.
 export const KB_TEXT = readFileSync(path.join(process.cwd(), "src", "data", "metro_kb.txt"), "utf8").replace(/\r\n?/g, "\n")
 
 export const SECTIONS: Section[] = []
@@ -120,7 +119,7 @@ function score(section: Section, wanted: Set<string>): number {
 export function search(query: string, k: number = 3): Section[] {
   const wanted = new Set(terms(query))
   if (!wanted.size) return []
-  // Python: sorted(((score, index) ...), reverse=True) — ties go to the later section.
+  // Best score first; equal scores go to the later section (the order the golden fixtures expect).
   const scored = SECTIONS.map((s, i) => [score(s, wanted), i] as const).sort((a, b) => b[0] - a[0] || b[1] - a[1])
   return scored
     .slice(0, k)

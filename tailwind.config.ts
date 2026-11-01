@@ -1,5 +1,4 @@
 /**
- * Tailwind config carried over from the CRA frontend with contents untouched.
  * The design tokens are CSS variables (RGB channels) defined in src/app/globals.css,
  * so one class works in light and dark mode.
  */

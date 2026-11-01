@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { GET } from "@/app/api/health/route"
 
-// Matches FastAPI's GET /health: {"status": "ok"} (backend/app.py).
+// The health check returns {"status": "ok"}.
 describe("GET /api/health", () => {
   it("returns ok", async () => {
     const response = await GET()

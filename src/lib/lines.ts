@@ -1,4 +1,4 @@
-// Official line identity colours (design.md §1.2). `color` is the AA-adjusted value for text and thin strokes.
+// Official line colours. `color` is the AA-adjusted value for text and thin strokes.
 export type LineId = "blue" | "red" | "yellow" | "violet" | "pink" | "lightblue"
 
 export type Line = {

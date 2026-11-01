@@ -1,6 +1,5 @@
 /**
- * Nearby stations and pasted Google Maps links — the 1:1 TypeScript port of
- * backend/metro/locations.py.
+ * Nearby stations and pasted Google Maps links.
  *
  * Nearby: shortlist the closest stations by straight line, then ask a routing service (walking
  * first, driving as fallback) for real distances and times, and the actual path for the three
@@ -12,7 +11,7 @@
 import { NETWORK, isOperational } from "./network"
 import { pyRound } from "./rounding"
 
-/** The backend raised ValueError for anything the rider can fix; the API layer maps it to HTTP 400. */
+/** A problem the user can fix (a bad link, no coordinates found); the API layer returns it as HTTP 400. */
 export class ValueError extends Error {}
 
 type Coords = [lat: number, lng: number]
@@ -58,7 +57,7 @@ const COORD_PATTERNS: [RegExp, 1 | 2, 1 | 2][] = [
   [new RegExp(`!4d${NUM}!3d${NUM}`), 2, 1],
 ]
 
-/** The '?' query of a URL — Python's urlparse(url).query (fragment split first). */
+/** The query string of a URL (after '?'), with any '#fragment' removed first. */
 function urlQuery(url: string): string {
   const hash = url.indexOf("#")
   const withoutFragment = hash === -1 ? url : url.slice(0, hash)
@@ -66,7 +65,7 @@ function urlQuery(url: string): string {
   return question === -1 ? "" : withoutFragment.slice(question + 1)
 }
 
-/** Python's parse_qs: '+' is a space, blank values drop the pair, repeated keys collect. */
+/** Parses a query string: '+' is a space, empty values are dropped, repeated keys collect every value. */
 function parseQuery(queryString: string): Map<string, string[]> {
   const out = new Map<string, string[]>()
   for (const part of queryString.split("&")) {
@@ -86,7 +85,7 @@ function unquote(text: string): string {
   try {
     return decodeURIComponent(text)
   } catch {
-    return text // Python replaces malformed escapes; keeping the text is close enough for Map URLs
+    return text // malformed escape: keep the raw text (good enough for Maps URLs)
   }
 }
 
@@ -175,7 +174,7 @@ export async function resolveGoogleMapsUrl(rawUrl: string): Promise<ResolvedMaps
           if (coordinates) break
           continue
         }
-        if (!response.ok) throw new Error("HTTP error") // Python: raise_for_status
+        if (!response.ok) throw new Error("HTTP error")
         break
       }
       finalUrl = current
@@ -193,8 +192,8 @@ export async function resolveGoogleMapsUrl(rawUrl: string): Promise<ResolvedMaps
   return { latitude, longitude, resolved_url: finalUrl, place_name: "Google Maps location" }
 }
 
+/** All stations with coordinates, for mapping (one entry per station, interchanges included once). */
 export function getStationsWithCoordinates(): StationWithCoords[] {
-  /** All stations with coordinates, for mapping (one entry per station, interchanges included once). */
   return [...NETWORK.coords.entries()]
     .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
     .map(([name, [lat, lon]]) => ({ name, latitude: lat, longitude: lon }))
@@ -223,7 +222,7 @@ async function table(
       headers: ROUTER_HEADERS,
       signal: AbortSignal.timeout(10_000),
     })
-    if (!response.ok) return null // Python: raise_for_status -> except -> None
+    if (!response.ok) return null // service error: treat it as unavailable
     const data = (await response.json()) as {
       distances: (number | null)[][]
       durations: (number | null)[][]
@@ -237,7 +236,7 @@ async function table(
   }
 }
 
-/** Path from the user to a station as [[lat, lng], ...], or None. Starts and ends exactly at the two markers. */
+/** Path from the user to a station as [[lat, lng], ...], or null. Starts and ends exactly at the two markers. */
 async function routePath(
   base: string,
   profile: string,

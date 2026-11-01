@@ -1,9 +1,9 @@
 /**
- * Small pieces of Python behaviour the chatbot port depends on, so the TypeScript answers match the
- * FastAPI backend's word for word:
+ * Python behaviours the chatbot relies on. Its answers are pinned word for word to golden fixtures
+ * captured from the original Python implementation, so these helpers reproduce Python exactly:
  *
  * - pyRegex: Python's `\b` is Unicode-aware (a Gujarati letter is a word character), JavaScript's
- *   is ASCII-only, even with the u flag. Patterns are written with `\b` as in rules.py and
+ *   is ASCII-only, even with the u flag. Patterns are written with `\b` and
  *   rewritten to explicit Unicode lookarounds.
  * - getCloseMatches: difflib.get_close_matches (SequenceMatcher ratio, same filters and order).
  * - pyJsonDumps: json.dumps(..., ensure_ascii=False) with Python's default ", " / ": " separators.
@@ -19,7 +19,7 @@ export function pyRegex(source: string, flags: string = ""): RegExp {
   return new RegExp(source.replace(/\\b/g, BOUNDARY), flags.includes("u") ? flags : `${flags}u`)
 }
 
-/** f"{value:.{digits}f}" */
+/** Python's f"{value:.{digits}f}": fixed decimals, ties rounded to even. */
 export function pyFixed(value: number, digits: number): string {
   return pyRound(value, digits).toFixed(digits)
 }
@@ -29,7 +29,7 @@ export function pyFloatRepr(value: number): string {
   return Number.isInteger(value) ? value.toFixed(1) : String(value)
 }
 
-/** json.dumps(value, ensure_ascii=False). Every number is written as JavaScript would (no floats reach it). */
+/** Python's json.dumps(value, ensure_ascii=False). Every number is written as JavaScript would (no floats reach it). */
 export function pyJsonDumps(value: unknown): string {
   if (value === null || value === undefined) return "null"
   if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") return JSON.stringify(value)
@@ -40,7 +40,7 @@ export function pyJsonDumps(value: unknown): string {
 
 // ---------------------------------------------------------------- difflib
 
-/** SequenceMatcher(None, a, b) for short strings (no junk, no autojunk: both need len(b) >= 200). */
+/** Python's difflib.SequenceMatcher(None, a, b) for short strings (no junk, no autojunk: both need len(b) >= 200). */
 class SequenceMatcher {
   private readonly b2j = new Map<string, number[]>()
 
@@ -117,7 +117,7 @@ class SequenceMatcher {
   }
 }
 
-/** difflib.get_close_matches(word, possibilities, n, cutoff): best first, ties by the larger string. */
+/** Python's difflib.get_close_matches(word, possibilities, n, cutoff): best first, ties by the larger string. */
 export function getCloseMatches(word: string, possibilities: string[], n: number = 3, cutoff: number = 0.6): string[] {
   const b = Array.from(word)
   const scored: [number, string][] = []

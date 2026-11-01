@@ -210,7 +210,7 @@ const JourneyPlanner = () => {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // The planner reads the journey from the query (CRA passed it as router state).
+    // The planner reads the journey from the URL query (?from=&to=).
     router.push(
       source && destination && source !== destination
         ? `/routes?${new URLSearchParams({ from: source, to: destination })}`

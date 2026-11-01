@@ -1,4 +1,4 @@
-// English. Every key the app uses is here; hi.js and gu.js translate them (a missing key falls back to English).
+// English. Every key the app uses is here; hi.ts and gu.ts translate them (a missing key falls back to English).
 // {name} placeholders are filled in by t(key, { name: ... }).
 const en = {
   // App, navigation, theme, language

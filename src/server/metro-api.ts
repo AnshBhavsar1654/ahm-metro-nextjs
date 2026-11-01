@@ -1,7 +1,7 @@
 /**
- * The metro endpoints' payloads, exactly as backend/app.py's handlers built them. The route handlers in
- * src/app/api wrap these in HTTP; the golden tests call them directly, so the parity checks cover the
- * code the endpoints run. A result with `error` is a 400.
+ * Response bodies for the metro endpoints. The route handlers in src/app/api wrap these in HTTP; the
+ * golden tests call them directly, so the tests cover exactly the code the endpoints run. A result with
+ * `error` is returned as a 400.
  */
 import {
   calculateRouteDetails,

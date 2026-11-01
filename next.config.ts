@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     "/api/chat/stream": ["./src/data/metro_kb.txt"],
   },
   async rewrites() {
-    // FastAPI served GET /health; the chat widget's warm-up still uses it.
+    // Short alias for the health check; the chat widget calls it to wake the server.
     return [{ source: "/health", destination: "/api/health" }]
   },
 }

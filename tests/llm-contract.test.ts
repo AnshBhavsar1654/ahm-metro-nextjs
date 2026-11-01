@@ -1,8 +1,9 @@
 /**
- * Phase 1 contract tests over the committed LLM spike fixtures (no network, no API key).
+ * Contract tests over the Gemini / LangChain responses recorded in tests/fixtures/llm by
+ * scripts/llm-spike.ts (no network, no API key).
  *
- * These encode the exact stream mechanics src/domain/chat/agent.ts will code against in
- * Phase 5, so any library upgrade that changes them surfaces as a test failure.
+ * They pin the stream and error behaviour src/domain/chat/agent.ts relies on, so a library upgrade that
+ * changes it fails here first.
  */
 import fs from "node:fs"
 import path from "node:path"
@@ -68,7 +69,7 @@ describe("gemini error classification surfaces (from live probe fixtures)", () =
   }
   const dailyCap = load("agent-stream-daily-cap-429.json") as { error: ErrorShape }
 
-  // The JS port classifies from message text (Python parsed error.details); these are the patterns it must match.
+  // agent.ts classifies errors by their message text; these are the patterns it must recognise.
   it("bad key is recognisable as a config error", () => {
     expect(shapes.bad_key.message).toMatch(/API key not valid/i)
   })

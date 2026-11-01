@@ -8,8 +8,7 @@
  *     Details Essentials only stops counting after 12 calls.
  *   - Place Details Essentials (the `location` field): 10,000.
  * So that the free usage is never used up, each SKU stops at MONTHLY_BUDGET (80% of it) for the rest of the
- * calendar month (Pacific time, as Google bills). The search then falls back to OpenStreetMap Nominatim, as it
- * did before.
+ * calendar month (Pacific time, as Google bills). The search then falls back to OpenStreetMap Nominatim.
  *
  * Every call is checked against, in order: a per-IP limit per minute and per day, a global per-minute limit
  * and a global daily cap (so a burst or a script can't spend the month in a day), then the monthly budget.

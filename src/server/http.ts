@@ -1,7 +1,7 @@
 /**
- * What the route handlers share, carried over from backend/app.py: the { error } response, the
- * client's IP behind a proxy, Server-Sent Events framing, and FastAPI-style request validation
- * (a malformed body or query parameter is a 422, as pydantic made it).
+ * Helpers shared by the API route handlers: the { error } response, the client's IP behind a proxy,
+ * Server-Sent Events framing, and request validation (a malformed body or query parameter returns 422
+ * with a { detail } message).
  */
 import { NextResponse } from "next/server"
 
@@ -49,7 +49,7 @@ export function validationResponse(error: ValidationError): NextResponse {
   return NextResponse.json({ detail: [{ msg: error.message }] }, { status: 422 })
 }
 
-/** The JSON body as an object, or a ValidationError (FastAPI: "Field required" / "JSON decode error"). */
+/** The JSON body as an object; throws ValidationError if it isn't valid JSON or isn't an object. */
 export async function jsonBody(request: Request): Promise<Record<string, unknown>> {
   let body: unknown
   try {
@@ -62,7 +62,7 @@ export async function jsonBody(request: Request): Promise<Record<string, unknown
   return body as Record<string, unknown>
 }
 
-/** A string field with a default, as `field: str = ""` in a pydantic model. */
+/** An optional string field: "" when missing; throws ValidationError if it is null or not a string. */
 export function stringField(body: Record<string, unknown>, name: string): string {
   const value = body[name]
   if (value === undefined || value === null) {
@@ -75,7 +75,7 @@ export function stringField(body: Record<string, unknown>, name: string): string
 
 const FLOAT = /^\s*[+-]?(?:(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?|inf(?:inity)?|nan)\s*$/i
 
-/** An optional float query parameter (FastAPI `Optional[float] = None`). */
+/** An optional number query parameter: null when missing; throws ValidationError if it isn't a number. */
 export function floatParam(params: URLSearchParams, name: string): number | null {
   const raw = params.get(name)
   if (raw === null) return null

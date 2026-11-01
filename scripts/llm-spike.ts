@@ -1,6 +1,6 @@
 /**
- * Phase 1 LLM spike. Answers, with a real key and real models, the three questions the
- * agent port depends on:
+ * Manual probe of the Gemini / LangChain behaviour the chat agent (src/domain/chat/agent.ts) relies on.
+ * Uses a real API key and real models to answer three questions:
  *
  *   A. What does a plain ChatGoogle.stream() yield for the DEFAULT_MODELS pair (chunk shapes,
  *      timings, thinking_budget/thinking_level accepted)?
@@ -44,7 +44,7 @@ type ErrorShape = {
   cause?: string
 }
 
-/** Flatten LangChain/Gemini error wrappers the way chatbot/agent.py's classify()/cooldown_seconds() do. */
+/** Flattens LangChain/Gemini error wrappers into the fields agent.ts's classify() and cooldownSeconds() read. */
 function shape(error: unknown): ErrorShape {
   const err = error as {
     name?: string
@@ -78,8 +78,8 @@ function shape(error: unknown): ErrorShape {
 /** Probe A: raw model streaming for both default models. */
 async function probeRawModel(): Promise<Record<string, unknown>> {
   const { ChatGoogle } = await import("@langchain/google")
-  // @langchain/google has no constructor `timeout` (Python's ChatGoogleGenerativeAI does) — the
-  // port wraps per-call deadlines in the race layer instead of passing them to the model.
+  // @langchain/google has no `timeout` option, so the agent enforces per-call deadlines in its race
+  // layer instead of passing them to the model.
   const generate = (model: string, thinking: string) =>
     thinking === "minimal"
       ? new ChatGoogle({ model, apiKey, reasoningEffort: "minimal", maxOutputTokens: 1024, maxRetries: 1 })
@@ -176,8 +176,8 @@ async function probeAgent(target: "a" | "b"): Promise<Record<string, unknown>> {
   const events: unknown[] = []
   let firstNode: string | null = null
   try {
-    // Single-string streamMode yields live [chunk, meta] tuples (the array form tags items
-    // as [modeTag, [serializedChunk, meta]] — that nesting is what earlier probes recorded).
+    // A single-string streamMode yields live [chunk, meta] tuples. (The array form wraps each item as
+    // [modeTag, [serializedChunk, meta]] instead.)
     const stream = await agent.stream(
       {
         messages: [["user" as const, "What is the fare from Motera Stadium to Paldi?"]],

@@ -126,7 +126,7 @@ describe("nearby stations with a stubbed router (port logic, deterministic)", ()
     expect(nearby.map((s) => s.distance_type)).toEqual(["straight", "straight", "straight"])
     expect(nearby.map((s) => s.walk_minutes)).toEqual([null, null, null])
     for (const station of nearby) {
-      // No router backend: the map draws a straight line itself, so no path comes back.
+      // No routing service answers: no path comes back, and the map draws a straight line itself.
       expect(station.path).toBeNull()
     }
   })
@@ -143,7 +143,7 @@ describe("nearby stations with a stubbed router (port logic, deterministic)", ()
   })
 })
 
-/** The captured fixture proves the same shape is what the real backend produced. */
+/** The captured fixture confirms the original backend returned the same response shape. */
 describe("captured nearby fixture (structure only — live router data shifts)", () => {
   it("three nearest, sane fields", () => {
     const golden = load("nearby.json") as { distance: number; distance_type: string; walk_minutes: unknown; path: unknown }[]

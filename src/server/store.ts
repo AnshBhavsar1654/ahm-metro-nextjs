@@ -5,8 +5,8 @@
  * - With UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN set (or Vercel's KV_REST_API_URL /
  *   KV_REST_API_TOKEN), it lives in Upstash Redis: shared by every server instance and kept across
  *   deploys, so the app also works on serverless hosting.
- * - Without them, it lives in this process (the FastAPI backend's behaviour), and the visit total is
- *   saved to a small JSON file (VISITS_FILE).
+ * - Without them, it lives in this process, and the visit total is saved to a small JSON file
+ *   (VISITS_FILE).
  *
  * Redis trouble never breaks a request: reads come back empty, limits let the request through, and
  * the failure is logged.
@@ -26,8 +26,8 @@ export interface Store {
    */
   incr(key: string, ttlSeconds?: number): Promise<number | null>
   /**
-   * Sliding-window limit (a deque of hit times per key, as backend/app.py kept): records a hit and
-   * returns true unless `limit` hits already happened in the last `windowSeconds`.
+   * Sliding-window rate limit: records a hit and returns true, unless `limit` hits already happened in
+   * the last `windowSeconds` (then nothing is recorded and it returns false).
    */
   hit(key: string, windowSeconds: number, limit: number): Promise<boolean>
   /** Presence: `member` is alive for `ttlSeconds` after each touch. */

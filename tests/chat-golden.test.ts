@@ -1,7 +1,7 @@
 // @vitest-environment node
 /**
- * Golden parity: the TypeScript chatbot (rules, retrieval, tools, prompt assembly) against the real
- * outputs of backend/chatbot, captured by scripts/capture-golden-chat.py at a fixed IST moment.
+ * Golden tests: the chatbot (rules, retrieval, tools, prompt assembly) must reproduce the outputs of the
+ * original Python chatbot, captured by scripts/capture-golden-chat.py at a fixed moment (Ahmedabad time).
  */
 import { readFileSync } from "node:fs"
 import path from "node:path"
