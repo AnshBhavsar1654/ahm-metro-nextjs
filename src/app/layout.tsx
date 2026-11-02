@@ -31,7 +31,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const lang = pickLanguage(jar.get(LANGUAGE_KEY)?.value, (await headers()).get("accept-language"))
 
   return (
-    <html lang={lang} className={theme === "dark" ? "dark" : undefined} suppressHydrationWarning>
+    <html
+      lang={lang}
+      className={theme === "dark" ? "dark" : undefined}
+      // globals.css scrolls smoothly; this keeps page-to-page navigation jumping to the top instantly.
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
