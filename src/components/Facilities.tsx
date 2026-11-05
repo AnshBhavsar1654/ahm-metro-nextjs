@@ -86,7 +86,6 @@ const facilitiesData: Record<string, Facility[]> = {
 const Facilities = () => {
   const { t } = useI18n()
   const [selected, setSelected] = useState("passengers")
-  const isEmergency = selected === "emergency"
 
   return (
     <div className="min-h-screen bg-surface-0 pb-10">
@@ -119,14 +118,8 @@ const Facilities = () => {
 
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {facilitiesData[selected]!.map(({ key, described, icon: Icon }) => (
-            <li
-              key={key}
-              className={
-                "flex items-start gap-4 rounded-lg border border-line-200 bg-surface-1 p-5 " +
-                (isEmergency ? "border-l-4 border-l-alert-600" : "")
-              }
-            >
-              <Icon strokeWidth={1.75} size={26} className={`shrink-0 ${isEmergency ? "text-alert-600" : "text-accent"}`} />
+            <li key={key} className="flex items-start gap-4 rounded-lg border border-line-200 bg-surface-1 p-5">
+              <Icon strokeWidth={1.75} size={26} className="shrink-0 text-accent" />
               <div>
                 <h3 className="font-sans text-sm font-semibold leading-snug text-ink-900">{t(`fac.${key}`)}</h3>
                 {described && <p className="mt-1 text-sm leading-relaxed text-ink-600">{t(`fac.${key}Text`)}</p>}
